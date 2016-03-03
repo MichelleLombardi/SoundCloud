@@ -1,10 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	<style>
+		body {
+    		background-color: lightgray;
+		}
+        .ghost {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: #F0F0F0;
+            border-radius: 3px 3px 3px 3px;
+            -moz-border-radius: 3px 3px 3px 3px;
+            -webkit-border-radius: 3px 3px 3px 3px;
+            border: 1px solid #F0F0F0;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
+        .ghost:hover {
+            cursor: pointer;
+            border-color: white;
+            color: white;
+        }
+        .colorY{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: white;
+            border-radius: 3px 3px 3px 3px;
+            -moz-border-radius: 3px 3px 3px 3px;
+            -webkit-border-radius: 3px 3px 3px 3px;
+            border: 1px solid #9900CC;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            background: #9900CC;
+        }
+        .colorY:hover {
+            cursor: pointer;
+        }
+	</style>
 </head>
 <body>
+    <img id="firstImage" src="foto3.jpg" >
+    <div id="barDet1"></div>
+    <div id="fondo"></div>
+    <a class="ghost" id="signin">Sign in</a>
+    <a class="colorY" id="createaccount">Create account</a>
+    <script>
+        var content = document.createElement('div');
+        document.body.appendChild(content);
+        
+        var det1Bar=document.getElementById('barDet1');
+        det1Bar.style.position="absolute";
+        det1Bar.style.top="0px";
+        det1Bar.style.left="53px";
+        det1Bar.style.width="1240px";
+        det1Bar.style.height="5px";
+        det1Bar.style.background="#9900CC";
+        content.appendChild(det1Bar);
+        
+        var fondo =document.getElementById('fondo');
+        fondo.style.position="absolute";
+        fondo.style.top="469px";
+        fondo.style.left="53px";
+        fondo.style.width="1240px";
+        fondo.style.height="464px";
+        fondo.style.background="white";
+        content.appendChild(fondo);
+        
+        var image=document.getElementById('firstImage');
+        image.style.position="absolute";
+        image.style.top="5px";
+        image.style.left="53px";
+        image.style.width="1240px";
+        image.style.height="464px";
+        content.appendChild(image);
+        
+        var bSignin=document.getElementById('signin');
+        bSignin.style.position="absolute";
+        bSignin.style.top="40px";
+        bSignin.style.left="1033px";
+        bSignin.style.width="43px";
+        bSignin.style.height="15px";
+        content.appendChild(bSignin);
+        
+        var bCreateAccount=document.getElementById('createaccount');
+        bCreateAccount.style.position="absolute";
+        bCreateAccount.style.top="40px";
+        bCreateAccount.style.left="1110px";
+        bCreateAccount.style.width="100px";
+        bCreateAccount.style.height="15px";
+        content.appendChild(bCreateAccount);
 
+    </script>
 </body>
 </html>
