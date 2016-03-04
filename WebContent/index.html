@@ -10,11 +10,11 @@
         .ghost {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 14px;
-            color: #F0F0F0;
+            color: #E8E8E8;
             border-radius: 3px 3px 3px 3px;
             -moz-border-radius: 3px 3px 3px 3px;
             -webkit-border-radius: 3px 3px 3px 3px;
-            border: 1px solid #F0F0F0;
+            border: 1px solid #E8E8E8;
             padding-top: 5px;
             padding-right: 10px;
             padding-bottom: 5px;
@@ -41,61 +41,36 @@
         }
         .colorY:hover {
             cursor: pointer;
+        }        
+        .txt{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            border: 1px solid #DBE1EB;
+            border-radius: 4px;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 12px;
+            background-color: #E0E0E0;
+        }
+         .txt:focus {
+            background-color: white;
+             color: #484848;
         }
 	</style>
 </head>
 <body>
-    <img id="firstImage" src="./app/img/foto3.jpg"/>
-    <div id="barDet1"></div>
-    <div id="fondo"></div>
-    <a class="ghost" id="signin">Sign in</a>
-    <a class="colorY" id="createaccount">Create account</a>
-    <script>
-        var content = document.createElement('div');
-        document.body.appendChild(content);
-        
-        var det1Bar=document.getElementById('barDet1');
-        det1Bar.style.position="absolute";
-        det1Bar.style.top="0px";
-        det1Bar.style.left="53px";
-        det1Bar.style.width="1240px";
-        det1Bar.style.height="5px";
-        det1Bar.style.background="#9900CC";
-        content.appendChild(det1Bar);
-        
-        var fondo =document.getElementById('fondo');
-        fondo.style.position="absolute";
-        fondo.style.top="469px";
-        fondo.style.left="53px";
-        fondo.style.width="1240px";
-        fondo.style.height="464px";
-        fondo.style.background="white";
-        content.appendChild(fondo);
-        
-        var image=document.getElementById('firstImage');
-        image.style.position="absolute";
-        image.style.top="5px";
-        image.style.left="53px";
-        image.style.width="1240px";
-        image.style.height="464px";
-        content.appendChild(image);
-        
-        var bSignin=document.getElementById('signin');
-        bSignin.style.position="absolute";
-        bSignin.style.top="40px";
-        bSignin.style.left="1033px";
-        bSignin.style.width="43px";
-        bSignin.style.height="15px";
-        content.appendChild(bSignin);
-        
-        var bCreateAccount=document.getElementById('createaccount');
-        bCreateAccount.style.position="absolute";
-        bCreateAccount.style.top="40px";
-        bCreateAccount.style.left="1110px";
-        bCreateAccount.style.width="100px";
-        bCreateAccount.style.height="15px";
-        content.appendChild(bCreateAccount);
-
-    </script>
+    <div id="content">
+        <div id="barDet1" style="position:absolute; top:0px; left:53px; width:1240px; height:5px; background:#9900CC;"></div>
+        <img id="firstImage" src="foto3.jpg" style="position:absolute; top:5px; left:53px; width:1240px; height:464px;">
+        <div id="fondo" style="position:absolute; top:469px; left:53px; width:1240px; height:464px; background:white;"></div>
+        <a class="ghost" id="signin" style="position:absolute; top:40px; left:1030px; width:43px; height:15px;">Sign in</a>
+        <a class="colorY" id="createaccount" style="position:absolute; top:40px; left:1110px; width:100px; height:15px;">Create account</a>
+        <input type="text" id="inputsearch" class="txt" placeholder="Search for artists, bands, tracks, podcasts" required style="position:absolute; top:370px; left:258px; width:590px; height:25px;">
+        <p id="or" style="position:absolute; top:361px; left:888px; color:white; font-family:sans-serif; font-size: 17px;">or</p>
+        <a class="ghost" id="uploadyourown" style="position:absolute; top:372px; left:920px; width:110px; height:20px;">Upload your own</a>
+        <p id="titulo1" style="position:absolute; top:185px; left:360px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">All the music you already have.</p>
+        <p id="titulo2" style="position:absolute; top:235px; left:280px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">And all the music you could ever want.</p>
+    </div>
 </body>
 </html>
