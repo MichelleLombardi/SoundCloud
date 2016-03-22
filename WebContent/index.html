@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>SoundCloud</title>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
 	<style>
 		body {
     		background-color: lightgray;
@@ -57,12 +57,40 @@
             background-color: white;
              color: #484848;
         }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            z-index: 1; /* Sit on top */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #F8F8F8;
+            margin: 3% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 85%; /* Could be more or less, depending on screen size */
+            /*height: 85%;*/
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
 	</style>
 </head>
 <body>
     <div id="content">
         <div id="barDet1" style="position:absolute; top:0px; left:53px; width:1240px; height:5px; background:#9900CC;"></div>
-        <img id="firstImage" src="public/img/foto3.jpg" style="position:absolute; top:5px; left:53px; width:1240px; height:464px;">
+        <img id="firstImage" src="foto3.jpg" style="position:absolute; top:5px; left:53px; width:1240px; height:464px;">
         <div id="fondo" style="position:absolute; top:469px; left:53px; width:1240px; height:464px; background:white;"></div>
         <a class="ghost" id="signin" style="position:absolute; top:40px; left:1030px; width:43px; height:15px;">Sign in</a>
         <a class="colorY" id="createaccount" style="position:absolute; top:40px; left:1110px; width:100px; height:15px;">Create account</a>
@@ -72,5 +100,36 @@
         <p id="titulo1" style="position:absolute; top:185px; left:360px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">All the music you already have.</p>
         <p id="titulo2" style="position:absolute; top:235px; left:280px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">And all the music you could ever want.</p>
     </div>
+    
+        <!-- The Modal -->
+    <div id="myModal" class="modal" style="position:absolute; top:180px; left:450px; width:470px; height:370px;">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" style="position:absolute; top:20px; left:425px; font-weight: bold; font-family:Lucida Sans Unicode; font-size: 18px;">x</span>
+        Name:     <input type="text" id="name" class="txt"><br/><br/>
+        Lastname: <input type="text" id="lastname" class="txt"><br/><br/>
+        Birthday: <input type="text" id="birthday" class="txt"><br/><br/>
+        E-mail:   <input type="text" id="email" class="txt"><br/><br/>
+        Username: <input type="text" id="username" class="txt"><br/><br/>
+        Password: <input type="text" id="password" class="txt"><br/><br/>
+      </div>
+    </div>
+    
+    <script>
+        var modal = document.getElementById('myModal'); // Get the modal
+        var signin = document.getElementById("signin");// Get the button that opens the modal
+        var span = document.getElementsByClassName("close")[0];// Get the <span> element that closes the modal 
+        signin.onclick = function() {
+            modal.style.display = "block";
+        }// When the user clicks on the button, open the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }// When the user clicks on <span> (x), close the modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }// When the user clicks anywhere outside of the modal, close it
+    </script>
 </body>
 </html>
