@@ -1,6 +1,8 @@
 package mlob.org.routes;
 
-import mlob.org.objs.BrutalSon;
+import mlob.org.libs.JDBC;
+import mlob.org.libs.JSonG;
+import mlob.org.objs.SessionUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,91 +10,129 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.handler.Handler;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//1458597514051 62B976BC98BEA1BD5907F3F3982B73B5
-//1458597565544 975854E84CB86041169C613E05970EE8
-//1458597695675 2D472A224E189D006A6ECD432EC8C65A
-@WebServlet("/login")
+@WebServlet(
+        name = "Login",
+        urlPatterns = "/login"
+)
 public class Login extends HttpServlet {
     private PrintWriter out = null;
+    private JDBC jdbc = new JDBC(
+            JDBC.JDBC_MYSQL,
+            "db4free.net",
+            "brutal",
+            "masterkey",
+            "soundcloudveinte",
+            JDBC.PORT_MYSQL
+    );
+    private String authQuery = "" +
+            "SELECT " +
+            "app_user.id_app_user AS id," +
+            "app_user.name_app_user AS usuario," +
+            "app_user.lastname_app_user AS apellido " +
+            "FROM app_user " +
+            "WHERE app_user.username_app_user = ? " +
+            "AND app_user.password_app_user = ?"
+    ;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
         response.setHeader("Content-Type", "application/json");
-        BrutalSon json = new BrutalSon();
-
+        JSonG json = new JSonG();
 
         String parUser = request.getParameter("username");
         String parPass = request.getParameter("password");
 
-        if( parUser.equals("admin") && parPass.equals("masterkey") ) {
+        /*
+        * Hacemos una consulta para que nos cuenta cuantos registros hay
+        * que tengan parUser como usuario y parPass como contrasenia,
+        *
+        * Como sabemos que esta consulta solo nos debe retornar un registro
+        * entonces lo que hacemos es verificar la cantidad de filas que obtuvimos
+        * y le restamos 1 para despreciar la fila de los labels, es decir, que solo
+        * nos queden los registros, como sabemos que solo debe por haber una
+        * coincidenia entonces evaluamos en un if el la variable length para
+        * verificar que solo obtuvimos un solo registro
+        */
+        Object[][] table = jdbc.executeQuery(authQuery, parUser, parPass);
+
+        int length = table.length - 1;
+
+        // Verificamos que solo haya una coincidencia
+        if (length == 1) {
+
+            Object[] registro = table[1];
 
             HttpSession session = request.getSession();
 
-            System.out.println(session.getCreationTime());
-            System.out.println(session.getId());
+            SessionUser user = new SessionUser(
+                session.getId(),        // token
+                registro[0],  // id
+                registro[1],   // name
+                registro[2]    // lastname
+            );
 
-            //                      ms *   seg *  min
-            long timeDuration = 1000   * 60    * 2;     // 2 min de duracion
-            long expTime = session.getCreationTime() + timeDuration;
+            session.setAttribute("user", user);
 
-            session.setAttribute("id", 1);
-            session.setAttribute("name", "Orlando");
-            session.setAttribute("expTime", expTime);
-
+            json = user.getJson();
+        } else {
             json
-                .add("name", "Orlando")
-                .add("token", session.getId());
-        }
-        else {
-            json
-                .add("error", "Datos invalidos")
-                .add("token", "");
+                .add("error", "Datos invalidos");
         }
 
-        out.print(json.getJson());
+        response.setStatus(200);
+        out.print(json.toString());
     }
 
+    // Verificar si la session sigue activa
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
         response.setHeader("Content-Type", "application/json");
-        BrutalSon json = new BrutalSon();
+        JSonG json;
 
         HttpSession session = request.getSession();
+        String token = request.getHeader("Authorization");
 
-        String sessionId = request.getHeader("Authorization");
+        SessionUser user = (SessionUser) session.getAttribute("user");
 
-        System.out.println(sessionId);
-        System.out.println(session.getId());
+        // Si el token es igual al id de la session y tenemos los datos en la session
+        if(token.equals(session.getId()) && (user != null) ) {
+            // obtenemos los datos
+            json = user.getJson();
 
-        if( sessionId.equals(session.getId()) ) {
-            long expTime = (long) session.getAttribute("expTime");
-            long actTime = session.getLastAccessedTime();
-
-            if( actTime >= expTime ) {
-                session.invalidate();
-                // 440 Login Timeout
-                response.setStatus(440);
-                out.print(json.getJson());
-            }
-            else {
-                json
-                    .add("id", session.getAttribute("id").toString())
-                    .add("name", session.getAttribute("name").toString())
-                    .add("expTime", session.getAttribute("expTime").toString());
-                response.setStatus(200);
-                out.print(json.getJson());
-            }
+            // y los enviamos al cliente
         }
         else {
-            session.invalidate();
-            // 401 Unauthorized
-            response.setStatus(401);
-            out.print(json.getJson());
+            this.logout(session);
+            json = new JSonG();
+            json.add("error", "La session ya no sigue activa");
         }
+        response.setStatus(200);
+        out.print(json.toString());
 
+    }
+
+    // Cuando queremos hacer logout
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        out = response.getWriter();
+        response.setHeader("Content-Type", "application/json");
+
+        // Obtenemos la session
+        this.logout(request.getSession());
+
+        response.setStatus(200);
+        out.print("");
+    }
+
+    private HttpSession logout( HttpSession session ) {
+        // Vaciamos la variable user de la session
+        session.removeAttribute("user");
+
+        // La invalidamos
+        session.invalidate();
+
+        return session;
     }
 }

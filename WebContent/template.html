@@ -26,33 +26,43 @@
 
 <div ng-controller="LoginCtrl">
     <form name="loginForm">
-        <label>
-            <span>Usuario:</span>
-            <input type="text"
-                   name="username"
-                   ng-model="login.username"
-                   pattern="^[a-zA-Z][a-zA-Z0-9]{4,14}$"
-                   title="Inserte su usuario"
-                   required
-            >
-        </label>
+        <div ng-if="!usuario">
+            <h2 ng-show="conectarLoading">
+                Cargando
+            </h2>
+            <span ng-show="loginError">
+                {{loginError}}
+            </span>
+            <label>
+                <span>Usuario:</span>
+                <input type="text"
+                       name="username"
+                       ng-model="login.username"
+                       pattern="^[a-zA-Z][a-zA-Z0-9]{4,14}$"
+                       title="Inserte su usuario"
+                       required
+                >
+            </label>
 
-        <label>
-            <span>Contraseña:</span>
-            <input
-                    type="password"
-                    ng-model="login.password"
-                    pattern="^[a-zA-Z][a-zA-Z0-9]{4,14}$"
-                    title="Inserte su contraseña"
-                    required
-            >
-        </label>
+            <label>
+                <span>Contraseña:</span>
+                <input
+                        type="password"
+                        ng-model="login.password"
+                        pattern="^[a-zA-Z][a-zA-Z0-9]{4,14}$"
+                        title="Inserte su contraseña"
+                        required
+                >
+            </label>
 
-        <input type="button" ng-click="conectar(login)" value="Enviar" ng-disabled="loginForm.$invalid">
+            <input type="button" ng-click="conectar(login)" value="Enviar" ng-disabled="loginForm.$invalid">
+        </div>
     </form>
 
-    <button ng-click="verificar()">Verificar</button>
-    {{ respuesta | json }}
+    <div ng-if="usuario">
+        Hola {{ usuario.nombre }} {{ usuario.apellido }}
+        <button ng-click="desconectar()">Desconectar</button>
+    </div>
 </div>
 
 <ng-view></ng-view>

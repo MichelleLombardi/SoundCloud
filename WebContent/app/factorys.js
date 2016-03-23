@@ -4,34 +4,58 @@ app.factory("userData", ["$http", "localStorageService",
 
         return {
             "login": function (data, callback) {
-                console.log(data);
                 $http({
                     "url": "/login",
                     "method": "POST",
-                    "data": data,
-                    "headers": {
-                        'Content-Type': "application/x-www-form-urlencoded"
-                    }
+                    "data": data
                 }).then(
                     function (response) {
-                        userData = response.data;
-                        localStorageService.set("userData", userData);
-                        callback(userData);
+                        if( !response.data.error ) {
+                            userData = response.data;
+                            localStorageService.set("userData", userData);
+                            callback(userData);
+                        }
+                        else
+                            callback( null, response.data.error );
                     },
                     function (error) {
                         console.log(error);
                     }
                 );
             },
-            "logout": function () {
-                localStorageService.clearAll();
-                userData = null;
+            "logout": function (callback) {
+                $http({
+                    "url": "/login",
+                    "method": "DELETE"
+                }).then(
+                    function (response) {
+                        userData = null;
+                        localStorageService.clearAll();
+                        callback();
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
             },
-            "verify": function () {
-                return $http({
+            "verify": function (callback) {
+                $http({
                     "url": "/login",
                     "method": "GET"
-                });
+                }).then(
+                    function (response) {
+                        if( !response.data.error ) {
+                            userData = response.data;
+                            localStorageService.set("userData", userData);
+                            callback(userData);
+                        }
+                        else
+                            callback( null, response.data.error );
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
             },
             "getData": function () {
                 return userData;

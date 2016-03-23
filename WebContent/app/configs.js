@@ -35,7 +35,10 @@ app.config(["$routeProvider", "$httpProvider",
                         var data = localStorageService.get("userData");
 
                         // Asignamos el token a la cabecera de la peticion
-                        http.headers.Authorization = data.token;
+                        if( data )
+                            http.headers.Authorization = data.token;
+
+                        http.headers["Content-Type"] = "application/x-www-form-urlencoded";
 
                         // y transformamos de json a urlencoded la data que enviamos si es que la hay
                         http.data = $httpParamSerializerJQLike(http.data);

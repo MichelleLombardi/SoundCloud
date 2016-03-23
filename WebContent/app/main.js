@@ -1,5 +1,6 @@
 app.controller("MainCtrl", ["$scope", "$http",
     function ($scope, $http) {
+        
     }
 ]);
 
@@ -7,11 +8,14 @@ app.controller("LoginCtrl", ["$scope", "userData",
     function ($scope, userData) {
         $scope.conectar = data => {
             // Si el formulario es valido lo enviamos
-            console.log(data);
             if($scope.loginForm.$valid) {
-                userData.login(data, function() {
-                    
+                userData.login(data, function( usuario, error ) {
+                    $scope.usuario = usuario;
+                    $scope.loginError = error;
+
+                    $scope.conectarLoading = false;
                 });
+                $scope.conectarLoading = true;
             }
             // Si no entonces indicamos que hay un error
             else {
@@ -19,20 +23,19 @@ app.controller("LoginCtrl", ["$scope", "userData",
             }
         };
 
-        $scope.verificar = () => {
-            userData.verify().then(
-                function (e) {
-                    $scope.respuesta = e
-                },
-                function (e) {
-                    console.log(e);
-                    if( e.status === 401 || e.status === 440  ) {
-                        userData.logout();
-                    }
+        ($scope.verificar = () => {
+            userData.verify(function (usuario, error) {
+                console.log(error);
+                $scope.usuario = usuario;
+            })
+        })();
 
-                }
-            )
-        }
+        $scope.desconectar = () => {
+            userData.logout(function () {
+                $scope.usuario = null;
+            });
+        };
+
     }
 ]);
 
