@@ -20,6 +20,9 @@
             padding-bottom: 5px;
             padding-left: 10px;
         }
+        .point:hover{
+            cursor: pointer;
+        }
         .ghost:hover {
             cursor: pointer;
             border-color: white;
@@ -57,6 +60,7 @@
          .txt:focus {
             background-color: white;
             color: #484848;
+            /*border: 1px solid #DBE1EB;*/
         }
         .modal {
             display: none; /* Hidden by default */
@@ -146,6 +150,7 @@
         <a class="ghost" id="signin" style="position:absolute; top:40px; left:1030px; width:43px; height:15px; color:#E8E8E8;" >Sign in</a>
         <a class="colorY" id="createaccount" style="position:absolute; top:40px; left:1110px; width:100px; height:15px;">Create account</a>
         <input type="text" id="inputsearch" class="txt" placeholder="Search for artists, bands, tracks, podcasts" required style="position:absolute; top:370px; left:258px; width:590px; height:25px;">
+        <img id="imgsearch" class="point" src="search.png" style="position:absolute; top:380px; left:842px; width:16px; height:15px;">
         <p style="position:absolute; top:361px; left:888px; color:white; font-family:sans-serif; font-size: 17px;">or</p>
         <a class="ghost" id="uploadyourown" style="position:absolute; top:372px; left:920px; width:110px; height:20px;color:#E8E8E8;">Upload your own</a>
         <p  style="position:absolute; top:185px; left:360px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">All the music you already have.</p>
@@ -161,10 +166,14 @@
                 <p style="position:absolute; top:13px; left:61px; color:white; font-family: Arial; font-size: 14px;letter-spacing: 2px;">BEWEGT</p>
             </div>
             <p style="position:absolute; top:83px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">Your email address</p>
-            <input type="text" id="signinEmail" class="txt" style="position:absolute; top:120px; left:33px;width:305px;"/>
+            <input type="text" id="signinEmail" class="txt" style="position:absolute; top:117px; left:33px;width:305px;"/>
+            <img id="wrong" src="wrong.png" style="display:none; position:absolute; top:152px; left:34px; width:10px; height:10px;">
+            <p id="wrongemail" style="display:none; position:absolute; top:142px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your email address</p>
             
-            <p style="position:absolute; top:153px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">Your password</p>
+            <p style="position:absolute; top:156px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">Your password</p>
             <input type="text" id="signinPass" class="txt" style="position:absolute; top:190px; left:33px;width:305px;"/>
+            <img id="wrong1" src="wrong1.png" style="display:none; position:absolute; top:225px; left:34px; width:10px; height:10px;">
+            <p id="wrongpass" style="display:none; position:absolute; top:215px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your password</p>
             
             <a class="colorY" id="signinContB" style="position:absolute;width:43px; height:15px;top:235px; left:295px;">Sign in</a>
             <a class="ghost" id="cancel" style="position:absolute;width:46px; height:16px; color:#330033;top:235px; left:220px;">Cancel</a>
@@ -191,9 +200,22 @@
         var signinEmail = document.getElementById("signinEmail");// input  email del modal1
         var signinPass = document.getElementById("signinPass");// input password del modal1
         var anuncio = document.getElementById("anuncio");//div anuncion error signin
+        var cancel = document.getElementById("cancel");// button que cancela y cierra el modal1
+        var wrong = document.getElementById("wrong");
+        var wrongemail = document.getElementById("wrongemail");
+        var wrong1 = document.getElementById("wrong1");
+        var wrongpass = document.getElementById("wrongpass");
         
         //click en el boton signin
         signin.onclick = function() {
+            signinEmail.style.border="1px solid #DBE1EB";
+            wrong.style.display="none";
+            wrongemail.style.display="none";
+            signinPass.style.border="1px solid #DBE1EB";
+            wrong1.style.display="none";
+            wrongpass.style.display="none";
+            signinEmail.value= vacio; 
+            signinPass.value= vacio;
             modal1.style.display = "block";
         }
         
@@ -201,28 +223,67 @@
         x.onclick = function() {
             modal1.style.display = "none";
         }
+        //click en el boton cancel
+         cancel.onclick = function() {
+            modal1.style.display = "none";
+        }
+        
         
         //click en el boton sign in del modal1
         var vacio="";
         signinContB.onclick = function() {
-            loading.style.display = "block";
-            var i=0;
-            if(i==1){
-                setTimeout(function(){ 
-                    loading.style.display="none";
-                    modal1.style.display="none";
-                    }, 5000);
+            checkSignin();
+            if(aux1 == false){
+                if(aux2==false){
+                    signinEmail.style.border="1px solid #DBE1EB";
+                    wrong.style.display="none";
+                    wrongemail.style.display="none";
+                    signinPass.style.border="1px solid #DBE1EB";
+                    wrong1.style.display="none";
+                    wrongpass.style.display="none";
+                    loading.style.display = "block";
+                    var i=0;
+                    if(i==1){
+                        setTimeout(function(){ 
+                            loading.style.display="none";
+                            modal1.style.display="none";
+                            }, 5000);
+                    }else{
+                        setTimeout(function(){ 
+                            loading.style.display="none";
+                            signinEmail.value= vacio; 
+                            signinPass.value= vacio;
+                            anuncio.style.display="block";
+                            setTimeout(function(){
+                                anuncio.style.display="none";
+                            },3000);
+                            }, 5000);      
+                    }
+                }else{
+                    aux2=false;
+                }
             }else{
-                setTimeout(function(){ 
-                    loading.style.display="none";
-                    signinEmail.value= vacio; 
-                    signinPass.value= vacio;
-                    anuncio.style.display="block";
-                    setTimeout(function(){
-                        anuncio.style.display="none";
-                    },2500);
-                    }, 5000);
-                  
+                aux1=false;
+            }
+        }
+        
+        //funcion que corrabora que se hayan incluido todos los datos
+        var aux1=false;
+        var aux2=false;
+        function checkSignin(){
+            var email= signinEmail.value;
+            var password= signinPass.value;
+            if(email.trim()==vacio){
+                signinEmail.style.border="1px solid red";
+                wrong.style.display="block";
+                wrongemail.style.display="block";
+                aux1=true;
+            }
+            if(password.trim()==vacio){
+                signinPass.style.border="1px solid red";
+                wrong1.style.display="block";
+                wrongpass.style.display="block";
+                aux2=true;
             }
         }
         
