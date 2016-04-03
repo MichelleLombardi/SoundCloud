@@ -13,21 +13,9 @@ app.controller("LoginCtrl", ["$scope", "userData",
                     $scope.usuario = usuario;
                     
                     if( error ) {
-                    	setTimeout(function(){ 
-	                        loading.style.display="none";
-	                        signinEmail.value= vacio; 
-	                        signinPass.value= vacio;
-	                        anuncio.style.display="block";
-	                        setTimeout(function(){
-	                        	anuncio.style.display="none";
-	                        },3000);
-                        }, 5000);
+
                     }
                     else {
-                    	setTimeout(function(){ 
-                            loading.style.display="none";
-                            modal1.style.display="none";
-                            }, 5000);
                     	
                     }
                     $scope.loginError = error;
