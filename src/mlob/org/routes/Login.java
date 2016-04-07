@@ -13,10 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(
-        name = "Login",
-        urlPatterns = "/login"
-)
+@WebServlet("/login")
 public class Login extends HttpServlet {
     private PrintWriter out = null;
     private JDBC jdbc = new JDBC(
@@ -30,10 +27,10 @@ public class Login extends HttpServlet {
     private String authQuery = "" +
             "SELECT " +
             "app_user.id_app_user AS id," +
-            "app_user.name_app_user AS usuario," +
+            "app_user.name_app_user AS nombre," +
             "app_user.lastname_app_user AS apellido " +
             "FROM app_user " +
-            "WHERE app_user.username_app_user = ? " +
+            "WHERE app_user.email_app_user = ? " +
             "AND app_user.password_app_user = ?"
     ;
 
@@ -42,8 +39,8 @@ public class Login extends HttpServlet {
         response.setHeader("Content-Type", "application/json");
         JSonG json = new JSonG();
 
-        String parUser = request.getParameter("username");
-        String parPass = request.getParameter("password");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("password");
 
         /*
         * Hacemos una consulta para que nos cuenta cuantos registros hay
@@ -56,14 +53,14 @@ public class Login extends HttpServlet {
         * coincidenia entonces evaluamos en un if el la variable length para
         * verificar que solo obtuvimos un solo registro
         */
-        Object[][] table = jdbc.executeQuery(authQuery, parUser, parPass);
+        Object[][] table = jdbc.executeQuery(authQuery,email, pass);
 
         int length = table.length - 1;
 
         // Verificamos que solo haya una coincidencia
-        if (length == 1) {
+        if (length == 1) { //una sola persona
 
-            Object[] registro = table[1];
+            Object[] registro = table[1]; //datos de la persona
 
             HttpSession session = request.getSession();
 
@@ -81,9 +78,8 @@ public class Login extends HttpServlet {
             json
                 .add("error", "Datos invalidos");
         }
-
-        response.setStatus(200);
-        out.print(json.toString());
+        
+        out.print(json.toString()); //getjson
     }
 
     // Verificar si la session sigue activa

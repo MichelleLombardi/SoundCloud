@@ -350,23 +350,35 @@
                     wrongpass.style.display="none";
                     loading.style.display = "block";
 
-                   var i=0;
-                    if(i==1){
-                        setTimeout(function(){ 
-                            loading.style.display="none";
-                            modal1.style.display="none";
-                            }, 5000);
-                    }else{
-                        setTimeout(function(){ 
-                            loading.style.display="none";
-                            signinEmail.value= vacio; 
-                            signinPass.value= vacio;
-                            anuncio.style.display="block";
-                            setTimeout(function(){
-                                anuncio.style.display="none";
-                            },3000);
-                            }, 5000);      
-                    }
+                    $.ajax({
+                    	url: "/login",
+                    	type: "POST",
+                    	data: {
+                    		email: signinEmail.value, 
+                    		pass: signinPass.value
+                    	},
+                    	success: function(data) {
+                    		console.log(data);
+                    		setTimeout(function(){ 
+                                loading.style.display="none";
+                                modal1.style.display="none";
+                                }, 5000);
+                    	},
+                    	error: function(err) {
+                    		console.log(err);
+                    		setTimeout(function(){ 
+                                loading.style.display="none";
+                                signinEmail.value= vacio; 
+                                signinPass.value= vacio;
+                                anuncio.style.display="block";
+                                setTimeout(function(){
+                                    anuncio.style.display="none";
+                                },3000);
+                                }, 5000);      
+                        }
+                    });
+                    
+                                            
                 }else{
                     aux2=false;
                     signinEmail.style.border="1px solid #DBE1EB";
