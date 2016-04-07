@@ -3,79 +3,225 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Bewegt</title>
-    <link rel="shortcut icon" type="image/x-icon" href="public/img/soundcloud.png" />
-
-
+    <link rel="shortcut icon" type="image/x-icon" href="soundcloud.png" />
+    
     <!-- Libs -->
     <script src="public/libs/js/jquery.min.js"></script>
     <script src="public/libs/js/angular.min.js"></script>
     <script src="public/libs/js/angular-route.min.js"></script>
     <script src="public/libs/js/angular-local-storage.min.js"></script>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="public/css/main.css">
-
-    <!-- JS -->
-    <script src="public/js/main.js"></script>
-
     <!-- Aplication -->
     <script src="app/configs.js"></script>
     <script src="app/factorys.js"></script>
     <script src="app/main.js"></script>
 
+	<style>
+		body {
+    		background-color: lightgray;
+        }
+        .ghost {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            border-radius: 3px 3px 3px 3px;
+            -moz-border-radius: 3px 3px 3px 3px;
+            -webkit-border-radius: 3px 3px 3px 3px;
+            border: 1px solid #E8E8E8;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
+        .point:hover{
+            cursor: pointer;
+        }
+        .ghost:hover {
+            cursor: pointer;
+            border-color: white;
+            color: white;
+        }
+        .colorY{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: #E8E8E8;
+            border-radius: 3px 3px 3px 3px;
+            -moz-border-radius: 3px 3px 3px 3px;
+            -webkit-border-radius: 3px 3px 3px 3px;
+            border: 1px solid #9900CC;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            background: #9900CC;
+        }
+        .colorY:hover {
+            cursor: pointer;
+            color: white;
+        }        
+        .txt{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            border: 1px solid #DBE1EB;
+            border-radius: 4px;
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 12px;
+            background-color: #E0E0E0;
+        }
+         .txt:focus {
+            background-color: white;
+            color: #484848;
+            /*border: 1px solid #DBE1EB;*/
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            height: 100%; 
+            width: 100%;
+        }
+        .centrar{
+            position: absolute;
+            top:50%;
+            left:50%;
+            /*indicamos que el margen izquierdo, es la mitad de la anchura*/
+            margin-left:-200px;
+            /*indicamos que el margen superior, es la mitad de la altura*/
+            margin-top:-150px;
+            border:3px solid #E8E8E8;
+	   }
+        .ventanas{
+            background-color: whitesmoke;
+            border-radius: 4px;
+        }
+        
+        .loader:before,
+        .loader:after,
+        .loader {
+          border-radius: 50%;
+          width: 2.5em;
+          height: 2.5em;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          -webkit-animation: load7 1.8s infinite ease-in-out;
+          animation: load7 1.8s infinite ease-in-out;
+        }
+        .loader {
+          margin: 8em auto;
+          font-size: 10px;
+          position: relative;
+          text-indent: -9999em;
+          -webkit-animation-delay: 0.16s;
+          animation-delay: 0.16s;
+        }
+        .loader:before {
+          left: -3.5em;
+        }
+        .loader:after {
+          left: 3.5em;
+          -webkit-animation-delay: 0.32s;
+          animation-delay: 0.32s;
+        }
+        .loader:before,
+        .loader:after {
+          content: '';
+          position: absolute;
+          top: 0;
+        }
+        @-webkit-keyframes load7 {
+          0%,
+          80%,
+          100% {
+            box-shadow: 0 2.5em 0 -1.3em #ffffff;
+          }
+          40% {
+            box-shadow: 0 2.5em 0 0 #FFF;
+          }
+        }
+        @keyframes load7 {
+          0%,
+          80%,
+          100% {
+            box-shadow: 0 2.5em 0 -1.3em #ffffff;
+          }
+          40% {
+            box-shadow: 0 2.5em 0 0 #FFF;
+          }
+        }
+        #style-2::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            background-color: #F5F5F5;
+        }
+
+        #style-2::-webkit-scrollbar{
+            width: 9px;
+            background-color: #F5F5F5;
+        }
+
+        #style-2::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #C8C8C8;
+        }
+	</style>
 </head>
 <body ng-controller="MainCtrl">
     <!-----PAGINA PRINCIPAL----->
     <div id="content">
-        <div id="asd0"></div>
-        <img id="firstImage" src="public/img/foto3.jpg">
-        <div id="fondo"></div>
-        <a class="ghost" id="signin">Sign in</a>
-        <a class="colorY" id="createaccount">Create account</a>
-        <input type="text" id="inputsearch" class="txt" placeholder="Search for artists, bands, tracks, podcasts" required>
-        <img id="imgsearch" class="point" src="public/img/search.png">
-        <p id="asd9">or</p>
-        <a class="ghost" id="uploadyourown">Upload your own</a>
-        <p id="as10">All the music you already have.</p>
-        <p id="as11">And all the music you could ever want.</p>
-        <img id="iconImage" src="public/img/soundcloud1.png">
-        <p id="as12">BEWEGT</p>
+        <div style="position:absolute; top:0px; left:53px; width:1240px; height:5px; background:#9900CC;"></div>
+        <img id="firstImage" src="foto3.jpg" style="position:absolute; top:5px; left:53px; width:1240px; height:464px;">
+        <div id="fondo" style="position:absolute; top:469px; left:53px; width:1240px; height:464px; background:white;"></div>
+        <a class="ghost" id="signin" style="position:absolute; top:40px; left:1030px; width:43px; height:15px; color:#E8E8E8;" >Sign in</a>
+        <a class="colorY" id="createaccount" style="position:absolute; top:40px; left:1110px; width:100px; height:15px;">Create account</a>
+        <input type="text" id="inputsearch" class="txt" placeholder="Search for artists, bands, tracks, podcasts" required style="position:absolute; top:370px; left:258px; width:590px; height:25px;">
+        <img id="imgsearch" class="point" src="search.png" style="position:absolute; top:380px; left:842px; width:16px; height:15px;">
+        <p style="position:absolute; top:361px; left:888px; color:white; font-family:sans-serif; font-size: 17px;">or</p>
+        <a class="ghost" id="uploadyourown" style="position:absolute; top:372px; left:920px; width:110px; height:20px;color:#E8E8E8;">Upload your own</a>
+        <p  style="position:absolute; top:185px; left:360px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">All the music you already have.</p>
+        <p style="position:absolute; top:235px; left:280px; color:white; font-family:Lucida Sans Unicode; font-size: 40px;">And all the music you could ever want.</p>
+        <img id="iconImage" src="soundcloud1.png" style="position:absolute; top:43px; left:110px; width:38px; height:38px;">
+        <p style="position:absolute; top:40px; left:156px; color:white; font-family: Arial; font-size: 14px;letter-spacing: 2px;">BEWEGT</p>
     </div>
     <!-------------------->
     
     <!------MODAL SIGN IN----->
     <div id="myModal1" class="modal">
-        <div id="asd1" class="centrar ventanas">
-            <div id="asd2">
-                <img id="asd3" src="public/img/soundcloud1.png">
-                <p id="asd4">BEWEGT</p>
-                <p id="asd5">Sign in</p>
+        <div class="centrar ventanas" style="width:400px;height:315px;">
+            <div style="position:absolute; width:100%; height:75px; background:#330033;border-radius: 4px;">
+                <img src="soundcloud1.png" style="position:absolute; top:15px; left:15px; width:38px; height:38px;">
+                <p style="position:absolute; top:13px; left:61px; color:white; font-family: Arial; font-size: 14px;letter-spacing: 2px;">BEWEGT</p>
+                <p style="position:absolute; top:30px; left:300px; color:white; font-family: Arial; font-size: 16px;letter-spacing: 1px;">Sign in</p>
             </div>
-            <p id="asd6">Your email address</p>
-            <input type="text" id="signinEmail" ng-model="login.username" class="txt"/>
-            <img id="wrong" src="public/img/wrong.png">
-            <p id="wrongemail">Please enter your email address</p>
+            <p style="position:absolute; top:83px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">Your email address</p>
+            <input type="text" id="signinEmail" ng-model="login.username" class="txt" style="position:absolute; top:117px; left:33px;width:305px;"/>
+            <img id="wrong" src="wrong.png" style="display:none; position:absolute; top:152px; left:34px; width:10px; height:10px;">
+            <p id="wrongemail" style="display:none; position:absolute; top:142px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your email address</p>
             
-            <p id="asd7">Your password</p>
-            <input type="password" maxlength="20" id="signinPass" ng-model="login.password" class="txt"/>
-            <img id="check" src="public/img/check.png">
-            <img id="wrong1" src="public/img/wrong1.png">
-            <p id="wrongpass">Please enter your password</p>
+            <p style="position:absolute; top:156px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">Your password</p>
+            <input type="password" maxlength="20" id="signinPass" ng-model="login.password" class="txt" style="position:absolute; top:190px; left:33px;width:305px;"/>
+            <img id="check" src="check.png" style="display:none; position:absolute; top:195px; left:338px; width:20px; height:20px;">
+            <img id="wrong1" src="wrong1.png" style="display:none; position:absolute; top:225px; left:34px; width:10px; height:10px;">
+            <p id="wrongpass" style="display:none; position:absolute; top:215px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your password</p>
             
-            <a class="colorY" id="signinContB" ng-click="conectar(login)">Sign in</a>
-            <a class="ghost" id="cancel">Cancel</a>
+            <a class="colorY" id="signinContB" ng-click="conectar(login)" style="position:absolute;width:43px; height:15px;top:235px; left:295px;">Sign in</a>
+            <a class="ghost" id="cancel" style="position:absolute;width:46px; height:16px; color:#330033;top:235px; left:220px;">Cancel</a>
         
-            <div id="anuncio">
-                <p id="asd8">We couldn't sign you in, sure you had the right credentials?</p>
+            <div id= "anuncio" style="display:none; position:absolute;top:130px;left:25px;height:80px;background-color: rgba(0,0,0,0.4);border-radius: 4px;width:345px;">
+                <p style="position:absolute;text-align: center;left:12px; font-family: Arial; color:white; font-size: 18px;">We couldn't sign you in, sure you had the right credentials?</p>
             </div>
         </div>
-        <a class="colorY" id="x">x</a>
+        <a class="colorY" id="x" style="position:absolute;top:163px; left:860px;-webkit-border-radius: 200px 200px 200px 200px;-webkit-box-shadow: 1px 0px 12px 1px rgba(0,0,0,0.75);-moz-box-shadow: 1px 0px 12px 1px rgba(0,0,0,0.75);box-shadow: 1px 0px 12px 1px rgba(0,0,0,0.75);font-weight: bold;">x</a>
     </div>
     <!----------------------->
     
     <!-----MODAL LOADING----->
     <div id="loading" class="modal">
-        <div class="loader" id="loader"></div>
+        <div class="loader" id="loader" style="top:230px;"></div>
     </div>
     <!----------------------->
     
@@ -83,33 +229,33 @@
     <div id="myModal2" class="modal">
         <div class="centrar ventanas" style="width:400px;height:380px;">
             <div style="position:absolute; width:100%; height:75px; background:#330033;border-radius: 4px;">
-                <img src="public/img/soundcloud1.png" style="position:absolute; top:15px; left:15px; width:38px; height:38px;">
+                <img src="soundcloud1.png" style="position:absolute; top:15px; left:15px; width:38px; height:38px;">
                 <p style="position:absolute; top:13px; left:61px; color:white; font-family: Arial; font-size: 14px;letter-spacing: 2px;">BEWEGT</p>
             </div>
             <div id="style-2" style="position:absolute; width:100%; height:305px;border-radius: 4px; top:75px; overflow-x: hidden; overflow-y:auto;">
                 <p style="position:absolute; top:10px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">What's your first name?</p>
                 <input type="text" id="createaccountFN" class="txt" style="position:absolute; top:43px; left:33px;width:305px;"/>
-                <img id="wrong" src="public/img/wrong.png" style="display:block; position:absolute; top:78px; left:34px; width:10px; height:10px;">
+                <img id="wrong" src="wrong.png" style="display:block; position:absolute; top:78px; left:34px; width:10px; height:10px;">
                 <p id="wrongfn" style="display:block; position:absolute; top:68px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your first name</p>
 
                 <p style="position:absolute; top:80px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">What's your last name?</p>
                 <input type="text" id="createaccountLN" class="txt" style="position:absolute; top:115px; left:33px;width:305px;"/>
-                <img id="wrong1" src="public/img/wrong1.png" style="display:block; position:absolute; top:147px; left:34px; width:10px; height:10px;">
+                <img id="wrong1" src="wrong1.png" style="display:block; position:absolute; top:147px; left:34px; width:10px; height:10px;">
                 <p id="wrongln" style="display:block; position:absolute; top:137px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your last name</p>
                 
                 <p style="position:absolute; top:149px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">When is your birthday?</p>
                 <input type="date" id="createaccountB" class="txt" style="position:absolute; top:184px; left:33px;width:305px;"/>
-                <img id="wrong2" src="public/img/wrong2.png" style="display:block; position:absolute; top:222px; left:34px; width:10px; height:10px;">
+                <img id="wrong2" src="wrong2.png" style="display:block; position:absolute; top:222px; left:34px; width:10px; height:10px;">
                 <p id="wrongb" style="display:block; position:absolute; top:212px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your birthday</p>
                 
                 <p style="position:absolute; top:225px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">What's your email address?</p>
                 <input type="text" id="createaccountLN" class="txt" style="position:absolute; top:257px; left:33px;width:305px;"/>
-                <img id="wrong3" src="public/img/wrong3.png" style="display:block; position:absolute; top:290px; left:34px; width:10px; height:10px;">
+                <img id="wrong3" src="wrong3.png" style="display:block; position:absolute; top:290px; left:34px; width:10px; height:10px;">
                 <p id="wrongemail" style="display:block; position:absolute; top:280px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter your email address</p>
                 
                 <p style="position:absolute; top:293px; left:33px; color:#330033; font-family: Arial; font-size: 14px;">Enter a password</p>
                 <input type="password" maxlength="20" id="createaccountLN" class="txt" style="position:absolute; top:327px; left:33px;width:305px;"/>
-                <img id="wrong4" src="public/img/wrong4.png" style="display:block; position:absolute; top:360px; left:34px; width:10px; height:10px;">
+                <img id="wrong4" src="wrong4.png" style="display:block; position:absolute; top:360px; left:34px; width:10px; height:10px;">
                 <p id="wrongpw" style="display:block; position:absolute; top:350px; left:46px; color:red; font-family: Arial; font-size: 10px;">Please enter a password</p>
 
 
@@ -125,5 +271,157 @@
         <a class="colorY" id="x1" style="position:absolute;top:163px; left:860px;-webkit-border-radius: 200px 200px 200px 200px;-webkit-box-shadow: 1px 0px 12px 1px rgba(0,0,0,0.75);-moz-box-shadow: 1px 0px 12px 1px rgba(0,0,0,0.75);box-shadow: 1px 0px 12px 1px rgba(0,0,0,0.75);font-weight: bold;">x</a>
     </div>
     <!------------------------------->
+    
+    
+    
+    <script>
+        var modal1 = document.getElementById('myModal1'); // modal sign in
+        var loading = document.getElementById('loading'); // modal loading
+        var signin = document.getElementById("signin");// button que abre modal1
+        var x = document.getElementById("x");// button x que cierra modal1
+        var x1 = document.getElementById("x1");// button x que cierra modal2
+        var signinContB = document.getElementById("signinContB");// button que abre modalloading y registra
+        var signinEmail = document.getElementById("signinEmail");// input  email del modal1
+        var signinPass = document.getElementById("signinPass");// input password del modal1
+        var anuncio = document.getElementById("anuncio");//div anuncion error signin
+        var cancel = document.getElementById("cancel");// button que cancela y cierra el modal1
+        var cancel1 = document.getElementById("cancel1");// button que cancela y cierra el modal2
+        var wrong = document.getElementById("wrong");
+        var wrongemail = document.getElementById("wrongemail");
+        var wrong1 = document.getElementById("wrong1");
+        var check = document.getElementById("check");
+        var wrongpass = document.getElementById("wrongpass");
+        var modal2 = document.getElementById('myModal2'); // modal sign in
+        var createaccount = document.getElementById("createaccount");//botton que abre modal2
+        
+        
+        
+        //click en el boton signin
+        signin.onclick = function() {
+            check.style.display="none";
+            signinEmail.style.border="1px solid #DBE1EB";
+            wrong.style.display="none";
+            wrongemail.style.display="none";
+            signinPass.style.border="1px solid #DBE1EB";
+            wrong1.style.display="none";
+            wrongpass.style.display="none";
+            signinEmail.value= vacio; 
+            signinPass.value= vacio;
+            modal1.style.display = "block";
+            setInterval(function(){
+                if(signinPass.value.length==20){
+                    check.style.display="block";
+                }else{
+                    check.style.display="none";
+                }
+            },500);
+            
+        }
+        
+        //click en el boton x del modal 1
+        x.onclick = function() {
+            modal1.style.display = "none";
+        }
+        //click en el boton x del modal 2
+        x1.onclick = function() {
+            modal2.style.display = "none";
+        }
+        //click en el boton canceldel modal1
+         cancel.onclick = function() {
+            clearInterval(checksigninpass);
+            modal1.style.display = "none";
+        }
+         //click en el boton cancel del modal2
+        cancel1.onclick = function() {
+           modal2.style.display = "none";
+        }
+        
+        //click en el boton sign in del modal1
+        var vacio="";
+        signinContB.onclick = function() {
+            checkSignin();
+            if(aux1==false){
+                if(aux2==false){
+                    signinEmail.style.border="1px solid #DBE1EB";
+                    wrong.style.display="none";
+                    wrongemail.style.display="none";
+                    signinPass.style.border="1px solid #DBE1EB";
+                    wrong1.style.display="none";
+                    wrongpass.style.display="none";
+                    loading.style.display = "block";
+
+                   var i=0;
+                    if(i==1){
+                        setTimeout(function(){ 
+                            loading.style.display="none";
+                            modal1.style.display="none";
+                            }, 5000);
+                    }else{
+                        setTimeout(function(){ 
+                            loading.style.display="none";
+                            signinEmail.value= vacio; 
+                            signinPass.value= vacio;
+                            anuncio.style.display="block";
+                            setTimeout(function(){
+                                anuncio.style.display="none";
+                            },3000);
+                            }, 5000);      
+                    }
+                }else{
+                    aux2=false;
+                    signinEmail.style.border="1px solid #DBE1EB";
+                    wrong.style.display="none";
+                    wrongemail.style.display="none";
+                }
+            }else{
+                if(aux2==false){
+                   aux1=false; 
+                   signinPass.style.border="1px solid #DBE1EB";
+                   wrong1.style.display="none";
+                   wrongpass.style.display="none";
+                }else{
+                   aux1=false;
+                    aux2=false;
+                }
+            }
+        }//fin oclick signinContB
+        
+        //funcion que corrabora que se hayan incluido todos los datos
+        var aux1=false;
+        var aux2=false;
+        function checkSignin(){
+            var email= signinEmail.value;
+            var password= signinPass.value;
+            if(email.trim()==vacio){
+                signinEmail.style.border="1px solid red";
+                wrong.style.display="block";
+                wrongemail.style.display="block";
+                aux1=true;
+            }
+            if(password.trim()==vacio){
+                signinPass.style.border="1px solid red";
+                wrong1.style.display="block";
+                wrongpass.style.display="block";
+                aux2=true;
+            }
+        }
+        
+        //click en la parte transparente del div para el signin: salida
+        window.onclick = function(event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+        
+        //click en el boton create account
+        createaccount.onclick = function() {
+            modal2.style.display = "block";
+        }
+
+        
+    </script>
 </body>
 </html>
