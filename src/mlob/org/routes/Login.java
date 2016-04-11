@@ -17,21 +17,22 @@ import java.io.PrintWriter;
 public class Login extends HttpServlet {
     private PrintWriter out = null;
     private JDBC jdbc = new JDBC(
-            JDBC.JDBC_POSTGRESQL,
-            "postgres",
-            "localhost",
-            "masterkey",
-            "soundcloud",
-            JDBC.PORT_POSTGRESQL
+            JDBC.JDBC_MYSQL,        // JDBC
+            "db4free.org",          // Host
+            "brutal",               // User
+            "masterkey",            // Pass
+            "soundcloudveinte",     // DataBase
+            JDBC.PORT_MYSQL         // Port
     );
     private String authQuery = "" +
             "SELECT " +
-            "app_user.id_app_user AS id," +
-            "app_user.name_app_user AS nombre," +
-            "app_user.lastname_app_user AS apellido " +
+            "id_app_user AS id," +
+            "name_app_user AS nombre," +
+            "lastname_app_user AS apellido " +
             "FROM app_user " +
-            "WHERE app_user.email_app_user = ? " +
-            "AND app_user.password_app_user = ?"
+            "WHERE " +
+            "   email_app_user = ? AND " +
+            "   password_app_user = ?"
     ;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +41,7 @@ public class Login extends HttpServlet {
         JSonG json = new JSonG();
 
         String email = request.getParameter("email");
-        String pass = request.getParameter("password");
+        String pass = request.getParameter("pass");
 
         /*
         * Hacemos una consulta para que nos cuenta cuantos registros hay

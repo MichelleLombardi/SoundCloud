@@ -6,7 +6,7 @@ app.controller("MainCtrl", ["$scope", "$http",
 
 app.controller("LoginCtrl", ["$scope", "userData",
     function ($scope, userData) {
-        $scope.conectar = data => {
+        $scope.conectar = function(data) {
             // Si el formulario es valido lo enviamos
             if($scope.loginForm.$valid) {
                 userData.login(data, function( usuario, error ) {
@@ -30,14 +30,14 @@ app.controller("LoginCtrl", ["$scope", "userData",
             }
         };
 
-        ($scope.verificar = () => {
+        ($scope.verificar = function() {
             userData.verify(function (usuario, error) {
                 console.log(error);
                 $scope.usuario = usuario;
             })
         })();
 
-        $scope.desconectar = () => {
+        $scope.desconectar = function() {
             userData.logout(function () {
                 $scope.usuario = null;
             });
