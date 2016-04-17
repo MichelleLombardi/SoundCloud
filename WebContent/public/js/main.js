@@ -126,7 +126,7 @@ $(document).ready(function () {
                 loading.css({display: "block"});
 
                 $.ajax({
-                    url: "/login",
+                    url: "./login",
                     type: "POST",
                     data: {
                         email: signinEmail.val(),
@@ -141,6 +141,11 @@ $(document).ready(function () {
                             signinPass.val(vacio);
 
                             console.log(data);
+                            
+                            signin.css({display: "none"});
+                            createaccount.css({display: "none"});
+                            
+                            var signoutdiv = $('<div class="modal3"></div>');                            
                         }
                         else {
                             var error = data.error;
@@ -251,8 +256,8 @@ $(document).ready(function () {
                                     }, 3000);
                                 }, 5000);
                             }
-                        } else {
-                            aux5 = false;
+                        }else {
+                            aux7 = false;
                             caFN.css({border: "1px solid #DBE1EB"});
                             wrongfni.css({display: "none"});
                             wrongfn.css({display: "none"});
@@ -266,9 +271,9 @@ $(document).ready(function () {
                             wrongpi.css({display: "none"});
                             wrongp.css({display: "none"});
                         }
-                    } else {
-                        if (aux5 == false) {
-                            aux4 = false;
+                    }else {
+                        if (aux7 == false) {
+                            aux6 = false;
                             caFN.css({border: "1px solid #DBE1EB"});
                             wrongfni.css({display: "none"});
                             wrongfn.css({display: "none"});
@@ -282,49 +287,283 @@ $(document).ready(function () {
                             wrongei.css({display: "none"});
                             wronge.css({display: "none"});
                         } else {
-                            aux5 = false;
-                            aux4 = false;
+                            aux7 = false;
+                            aux6 = false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
                         }
                     }
-                } else {
-                    if (aux4 == false) {
-                        aux3 = false;
-                        caFN.css({border: "1px solid #DBE1EB"});
-                        wrongfni.css({display: "none"});
-                        wrongfn.css({display: "none"});
-                        caLN.css({border: "1px solid #DBE1EB"});
-                        wronglni.css({display: "none"});
-                        wrongln.css({display: "none"});
-                        caE.css({border: "1px solid #DBE1EB"});
-                        wrongei.css({display: "none"});
-                        wronge.css({display: "none"});
-                        caP.css({border: "1px solid #DBE1EB"});
-                        wrongpi.css({display: "none"});
-                        wrongp.css({display: "none"});
-                    } else {
-                        aux3 = false;
-                        aux4 = false;
+                }else {
+                    if (aux6 == false) {
+                        if(aux7==false){
+                            aux5==false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }else{
+                            aux5=false;
+                            aux7=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }
+                    }else{
+                        if(aux7==false){
+                            aux5=false;
+                            aux6=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                        }else{
+                            aux5=false;
+                            aux6=false;
+                            aux7=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                        }
                     }
-                    if (aux5 == false) {
-                        aux3 = false;
-                        caFN.css({border: "1px solid #DBE1EB"});
-                        wrongfni.css({display: "none"});
-                        wrongfn.css({display: "none"});
-                        caLN.css({border: "1px solid #DBE1EB"});
-                        wronglni.css({display: "none"});
-                        wrongln.css({display: "none"});
-                        caE.css({border: "1px solid #DBE1EB"});
-                        wrongei.css({display: "none"});
-                        wronge.css({display: "none"});
-                        caP.css({border: "1px solid #DBE1EB"});
-                        wrongpi.css({display: "none"});
-                        wrongp.css({display: "none"});
-                    } else {
-                        aux3 = false;
-                        aux5 = false;
+                }
+            }else{
+                if(aux5==false){
+                    if(aux6==false){
+                        if(aux7==false){
+                            aux4=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }else{
+                            aux4=false;
+                            aux7=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }
+                    }else{
+                        if(aux7==false){
+                            aux4=false;
+                            aux6=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                        }else{
+                            aux4=false;
+                            aux6=false;
+                            aux7=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                        }
+                    }
+                }else{
+                    if(aux6==false){
+                        if(7==false){
+                            aux4=false;
+                            aux5=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }else{
+                            aux4=false;
+                            aux5=false;
+                            aux7=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }
+                    }else{
+                        if(aux7==false){
+                            aux4=false;
+                            aux5=false;
+                            aux6=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                        }else{
+                            aux4=false;
+                            aux5=false;
+                            aux6=false;
+                            aux7=false;
+                            caFN.css({border: "1px solid #DBE1EB"});
+                            wrongfni.css({display: "none"});
+                            wrongfn.css({display: "none"});
+                        }
                     }
                 }
             }
+        }else{
+            if(aux4==false){
+                if(aux5==false){
+                    if(aux6==false){
+                        if(aux7==false){
+                            aux3=false;
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux7=false;
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }
+                    }else{
+                        if(aux4==false){
+                            if(aux5==false){
+                                if(aux7==false){
+                                    aux3=false;
+                                    aux6=false;
+                                    caB.css({border: "1px solid #DBE1EB"});
+                                    wrongbi.css({display: "none"});
+                                    wrongb.css({display: "none"});
+                                    caLN.css({border: "1px solid #DBE1EB"});
+                                    wronglni.css({display: "none"});
+                                    wrongln.css({display: "none"});
+                                    caE.css({border: "1px solid #DBE1EB"});
+                                    wrongei.css({display: "none"});
+                                    wronge.css({display: "none"});
+                                }else{
+                                    aux3=false;
+                                    aux6=false;
+                                    aux7=false;
+                                    caB.css({border: "1px solid #DBE1EB"});
+                                    wrongbi.css({display: "none"});
+                                    wrongb.css({display: "none"});
+                                    caLN.css({border: "1px solid #DBE1EB"});
+                                    wronglni.css({display: "none"});
+                                    wrongln.css({display: "none"});
+                                }
+                            }else{
+                                if(aux4==false){
+                                    if(aux7==false){
+                                        aux3=false;
+                                        aux5=false;
+                                        aux6=false;
+                                        caE.css({border: "1px solid #DBE1EB"});
+                                        wrongei.css({display: "none"});
+                                        wronge.css({display: "none"});
+                                        caLN.css({border: "1px solid #DBE1EB"});
+                                        wronglni.css({display: "none"});
+                                        wrongln.css({display: "none"});
+                                    }else{
+                                        aux3=false;
+                                        aux5=false;
+                                        aux6=false;
+                                        aux7=false;
+                                        caLN.css({border: "1px solid #DBE1EB"});
+                                        wronglni.css({display: "none"});
+                                        wrongln.css({display: "none"});
+                                    }
+                                }else{
+                                    if(aux5==false){
+                                        if(aux7==false){
+                                            aux3=false;
+                                            aux4=false;
+                                            aux6=false;
+                                            caB.css({border: "1px solid #DBE1EB"});
+                                            wrongbi.css({display: "none"});
+                                            wrongb.css({display: "none"});
+                                            caE.css({border: "1px solid #DBE1EB"});
+                                            wrongei.css({display: "none"});
+                                            wronge.css({display: "none"});
+                                        }else{
+                                            aux3=false;
+                                            aux4=false;
+                                            aux6=false;
+                                            aux7=false;
+                                            caB.css({border: "1px solid #DBE1EB"});
+                                            wrongbi.css({display: "none"});
+                                            wrongb.css({display: "none"});
+                                        }
+                                    }else{/*5*/}
+                                }
+                            }
+                        }else{/*4*/}
+                    }
+                }else{/*aux5*/}
+            }else{/*4*/}
         }
     }); //fin oclick caBotton
 

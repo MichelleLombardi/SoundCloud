@@ -17,12 +17,12 @@ import java.io.PrintWriter;
 public class Login extends HttpServlet {
     private PrintWriter out = null;
     private JDBC jdbc = new JDBC(
-            JDBC.JDBC_MYSQL,        // JDBC
-            "db4free.org",          // Host
-            "brutal",               // User
+            JDBC.JDBC_POSTGRESQL,        // JDBC
+            "localhost",          // Host
+            "postgres",               // User
             "masterkey",            // Pass
-            "soundcloudveinte",     // DataBase
-            JDBC.PORT_MYSQL         // Port
+            "soundcloud",     // DataBase
+            JDBC.PORT_POSTGRESQL         // Port
     );
     private String authQuery = "" +
             "SELECT " +
