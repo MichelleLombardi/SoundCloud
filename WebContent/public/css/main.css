@@ -704,8 +704,9 @@ body {
     top: 230px;
 }
 
-#logoutdiv{
-    background-color: rgba(255, 0, 0, 0.5);
+#logoutdiv {
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+    position:absolute;
     display: none;
     top: 40px;
     left: 1029px;
@@ -720,14 +721,16 @@ body {
     
 }
 
-#logoutdiv:hover{
+#logoutdiv:hover {
     cursor: pointer;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(232,232,232,0.4); /* Black w/ opacity */
 }
 
-#opclo{
+#opclo {
     position: absolute;
+    display: none;
+    top: 15px;
     width: 100%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;

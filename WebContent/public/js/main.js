@@ -175,7 +175,7 @@ $(document).ready(function () {
                 aux2 = false;
                 signinEmail.css({border: "1px solid #DBE1EB"});
                 wrong.css({display: "none"});
-                wrongemail.css({display: "noen"});
+                wrongemail.css({display: "none"});
             }
         } else {
             if (aux2 == false) {
