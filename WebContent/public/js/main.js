@@ -39,6 +39,8 @@ $(document).ready(function () {
     var check2 = $("#check1"); //imagen check create account password
     var anuncio2 = $("#anuncio2");//div anuncion error signin
     
+    
+    var logoutdiv = $("#logoutdiv");
     var logout = $("#logout");//boton para cerrar la sesion
 
     //click en el boton signin
@@ -139,6 +141,9 @@ $(document).ready(function () {
 
                             signin.css({"display":"none"});
                             createaccount.css({"display":"none"});
+                            logoutdiv.css({"display":"block"});
+                            logoutdiv.text("hola");
+                            
                         }
                         else {
                             var error = data.error;
@@ -170,7 +175,7 @@ $(document).ready(function () {
                 aux2 = false;
                 signinEmail.css({border: "1px solid #DBE1EB"});
                 wrong.css({display: "none"});
-                wrongemail.css({display: "none"});
+                wrongemail.css({display: "noen"});
             }
         } else {
             if (aux2 == false) {
@@ -653,10 +658,10 @@ $(document).ready(function () {
 
     //click en la parte transparente del div para el signin: salida
     $(window).click(function (event) {
-        if (event.target == modal1) {
+        if (event.target == modal1[0]) {
             modal1.css({display: "none"});
         }
-        if (event.target == modal2) {
+        if (event.target == modal2[0]) {
             modal2.css({display: "none"});
         }
     });
