@@ -1,3 +1,5 @@
+/* global localStorage */
+/* global $ */
 $(document).ready(function () {
     var modal1 = $("#myModal1"); // modal sign in
     var loading = $("#loading"); // modal loading
@@ -36,8 +38,10 @@ $(document).ready(function () {
     var caP = $("#createaccountP");// input password del modal2
     var check2 = $("#check1"); //imagen check create account password
     var anuncio2 = $("#anuncio2");//div anuncion error signin
+    
+    var logout = $("#logout");//boton para cerrar la sesion
 
-//click en el boton signin
+    //click en el boton signin
     signin.click(function () {
         check.css({display: "none"});
         signinEmail.css({border: "1px solid #DBE1EB"});
@@ -59,7 +63,7 @@ $(document).ready(function () {
         }, 500);
     });
 
-//click en el boton create account
+    //click en el boton create account
     createaccount.click(function () {
         caFN.css({border: "1px solid #DBE1EB"});
         wrongfni.css({display: "none"});
@@ -91,27 +95,19 @@ $(document).ready(function () {
         }, 500);
     });
 
-//click en el boton x del modal 1
-    x.click(function () {
-        modal1.css({display: "none"});
-    });
+    //click en el boton x del modal 1
+    x.click(function () { modal1.css({display: "none"}); });
 
-//click en el boton x del modal 2
-    x1.click(function () {
-        modal2.css({display: "none"});
-    });
+    //click en el boton x del modal 2
+    x1.click(function () { modal2.css({display: "none"}); });
 
-//click en el boton canceldel modal1
-    cancel.click(function () {
-        modal1.css({display: "none"});
-    });
+    //click en el boton canceldel modal1
+    cancel.click(function () { modal1.css({display: "none"}); });
 
-//click en el boton cancel del modal2
-    cancel1.click(function () {
-        modal2.css({display: "none"});
-    });
+    //click en el boton cancel del modal2
+    cancel1.click(function () { modal2.css({display: "none"}); });
 
-//click en el boton sign in del modal1
+    //click en el boton sign in del modal1
     var vacio = "";
     signinContB.click(function () {
         checkSignin();
@@ -125,6 +121,7 @@ $(document).ready(function () {
                 wrongpass.css({display: "none"});
                 loading.css({display: "block"});
 
+                console.log("Tratamos de hacer login: ");
                 $.ajax({
                     url: "./login",
                     type: "POST",
@@ -137,15 +134,11 @@ $(document).ready(function () {
                             loading.css({display: "none"});
                             modal1.css({display: "none"});
 
-                            signinEmail.val(vacio);
-                            signinPass.val(vacio);
-
+                            localStorage.user = JSON.stringify(data);
                             console.log(data);
-                            
-                            signin.css({display: "none"});
-                            createaccount.css({display: "none"});
-                            
-                            var signoutdiv = $('<div class="modal3"></div>');                            
+
+                            signin.css({"display":"none"});
+                            createaccount.css({"display":"none"});
                         }
                         else {
                             var error = data.error;
@@ -192,7 +185,7 @@ $(document).ready(function () {
         }
     }); //fin oclick signinContB
 
-//funcion que corrobora que se hayan incluido todos los datos del login
+    //funcion que corrobora que se hayan incluido todos los datos del login
     var aux1 = false;
     var aux2 = false;
     function checkSignin() {
@@ -212,8 +205,7 @@ $(document).ready(function () {
         }
     }
 
-//click en el boton create account del modal2
-    var vacio2 = "";
+    //click en el boton create account del modal2
     caBotton.click(function () {
         checkCreateAccount();
         if (aux3 == false) {
@@ -238,24 +230,67 @@ $(document).ready(function () {
                             wrongp.css({display: "none"});
                             loading.css({display: "block"});
 
-                            var i = 0;
+                            console.log("Tratamos de crear una cuenta: ");
                             //corroborar email
-                            if (i == 1) {
-                                setTimeout(function () {
+                            $.ajax({
+                                url: "./signup",
+                                type: "POST",
+                                data: {
+                                    firstName: caFN.val(),  // input  firt name del modal2
+                                    lastName: caLN.val(),   // input last name del modal2
+                                    birthday: caB.val(),    // input  birthday del modal2
+                                    email: caE.val(),       // input email del modal2
+                                    pass: caP.val()         // input password del modal2
+                                },
+                                success: function (data) {
+                                    // Si no hay error
+                                    if( !data.error ) {  // si el email no existe
+                                        loading.css({display: "none"});
+                                        modal2.css({display: "none"});
+                                        
+                                        caFN.val(vacio);
+                                        caLN.val(vacio);
+                                        caB.val(vacio);
+                                        caE.val(vacio);
+                                        caP.val(vacio);
+
+                                        localStorage.user = JSON.stringify(data);
+                                        console.log(data);
+
+                                        signin.css({"display":"none"});
+                                        createaccount.css({"display":"none"});
+                                    }
+                                    else {
+                                        var error = data.error;
+                                        caFN.val(vacio);
+                                        caLN.val(vacio);
+                                        caB.val(vacio);
+                                        caE.val(vacio);
+                                        caP.val(vacio);
+                                        loading.css({display: "none"});
+                                        anuncio.css({display: "block"});
+
+                                        setTimeout(function () {
+                                            anuncio.css({display: "none"});
+                                        }, 3000);
+
+                                        console.log(error);
+                                    }
+                                },
+                                error: function (err) {
                                     loading.css({display: "none"});
-                                    modal2.css({display: "none"}); // si el email no existe
-                                }, 5000);
-                            } else {
-                                setTimeout(function () {
-                                    loading.css({display: "none"});
-                                    caE.val(vacio2);
-                                    caP.val(vacio2);
+                                    caFN.val(vacio);
+                                    caLN.val(vacio);
+                                    caB.val(vacio);
+                                    caE.val(vacio);
+                                    caP.val(vacio);
                                     anuncio2.css({display: "block"});
                                     setTimeout(function () {
                                         anuncio2.css({display: "none"});
                                     }, 3000);
-                                }, 5000);
-                            }
+                                    console.log(err);
+                                }
+                            });
                         }else {
                             aux7 = false;
                             caFN.css({border: "1px solid #DBE1EB"});
@@ -565,9 +600,9 @@ $(document).ready(function () {
                 }else{/*aux5*/}
             }else{/*4*/}
         }
-    }); //fin oclick caBotton
+    }); //fin onclick caBotton
 
-//funcion que corrabora que se hayan incluido todos los datos del registro
+    //funcion que corrabora que se hayan incluido todos los datos del registro
     var aux3 = false;
     var aux4 = false;
     var aux5 = false;
@@ -625,4 +660,80 @@ $(document).ready(function () {
             modal2.css({display: "none"});
         }
     });
+    
+    // Esto verifica si hay una sesion guardada
+    // y en tal caso la inicia si existe
+    var user = JSON.parse(localStorage.user);
+    console.log("Hay una sesion activa?:");
+    if( user ) {
+        $.ajax({
+            url: "./login",
+            method: "GET",
+            headers: {
+                Authorization: user.token
+            },
+            success: function (data) {
+                // Si no hay error
+                if( !data.error ) {
+                    localStorage.user = JSON.stringify(data);
+                    console.log(data);
+                    signin.css({"display":"none"});
+                    createaccount.css({"display":"none"});
+                }
+                else {
+                    var error = data.error;
+                    localStorage.clear();
+                    console.log(error);
+                }
+            },
+            error: function (err) {
+                localStorage.clear();
+                console.log(err);
+            }
+        })
+    }
+    
+    // Cuando se hace click en logout
+    logout.click(function() {
+        var user = JSON.parse(localStorage.user);
+        console.log("Cerraremos la sesion:");
+        $.ajax({
+            url: "./login",
+            method: "DELETE",
+            success: function (data) {
+                // Borramos el localstorage
+                if( !data.error ) {
+                    localStorage.user = JSON.stringify(data);
+                    console.log(data);
+                    signin.css({"display":"block"});
+                    createaccount.css({"display":"block"});
+                    
+                    // Falta hacer display: none de los div del nombre
+                    // y logout pero aun no existen
+                }
+                else {
+                    var error = data.error;
+                    localStorage.clear();
+                    signin.css({"display":"block"});
+                    createaccount.css({"display":"block"});
+                    
+                    // Falta hacer display: none de los div del nombre
+                    // y logout pero aun no existen
+                    
+                    console.log(error);
+                }
+            },
+            error: function (err) {
+                localStorage.clear();
+                signin.css({"display":"block"});
+                createaccount.css({"display":"block"});
+                
+                // Falta hacer display: none de los div del nombre
+                // y logout pero aun no existen
+                
+                console.log(err);
+            }
+        })
+    });
+    
 });

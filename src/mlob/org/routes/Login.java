@@ -16,6 +16,20 @@ import java.io.PrintWriter;
 @WebServlet("/login")
 public class Login extends HttpServlet {
     private PrintWriter out = null;
+
+    /*
+    // Conexion a db4free
+    private JDBC jdbc = new JDBC(
+            JDBC.JDBC_MYSQL,        // JDBC
+            "db4free.org",          // Host
+            "brutal",               // User
+            "masterkey",            // Pass
+            "soundcloudveinte",     // DataBase
+            JDBC.PORT_MYSQL         // Port
+    );
+    */
+    
+    // Conexion a postgres
     private JDBC jdbc = new JDBC(
             JDBC.JDBC_POSTGRESQL,        // JDBC
             "localhost",          // Host
@@ -24,16 +38,6 @@ public class Login extends HttpServlet {
             "soundcloud",     // DataBase
             JDBC.PORT_POSTGRESQL         // Port
     );
-    private String authQuery = "" +
-            "SELECT " +
-            "id_app_user AS id," +
-            "name_app_user AS nombre," +
-            "lastname_app_user AS apellido " +
-            "FROM app_user " +
-            "WHERE " +
-            "   email_app_user = ? AND " +
-            "   password_app_user = ?"
-    ;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
@@ -54,6 +58,15 @@ public class Login extends HttpServlet {
         * coincidenia entonces evaluamos en un if el la variable length para
         * verificar que solo obtuvimos un solo registro
         */
+        String authQuery = "" +
+                "SELECT " +
+                "id_app_user AS id," +
+                "name_app_user AS nombre," +
+                "lastname_app_user AS apellido " +
+                "FROM app_user " +
+                "WHERE " +
+                "   email_app_user = ? AND " +
+                "   password_app_user = ?";
         Object[][] table = jdbc.executeQuery(authQuery,email, pass);
 
         int length = table.length - 1;
@@ -98,8 +111,6 @@ public class Login extends HttpServlet {
         if(token.equals(session.getId()) && (user != null) ) {
             // obtenemos los datos
             json = user.getJson();
-
-            // y los enviamos al cliente
         }
         else {
             this.logout(session);

@@ -23,24 +23,14 @@ public class SessionUser {
             .add("apellido", this.lastname);
     }
 
-    public String getToken() {
-        return this.token;
-    }
+    public String getToken() { return this.token; }
 
-    public int getId() {
-        return this.id;
-    }
+    public int getId() { return this.id; }
 
-    public String getName() {
-        return this.name;
-    }
+    public String getName() { return this.name; }
 
-    public String getLastname() {
-        return this.lastname;
-    }
+    public String getLastname() { return this.lastname; }
 
-    public JSonG getJson() {
-        return this.json;
-    }
+    public JSonG getJson() { return this.json; }
 
 }
