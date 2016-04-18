@@ -1067,7 +1067,7 @@ $(document).ready(function () {
             aux10 = true;
         }
 
-        if (tags.trim() == null) {
+        if (tags == null) {
             tagsong.css({border: "1px solid red"});
             wrongdti.css({display: "block"});
             wrongt.css({display: "block"});
