@@ -94,9 +94,11 @@ $(document).ready(function () {
             wrongsi.css({display: "none"});
             wrongs.css({display: "none"});
             namesong.val(vacio);
+            namesong.css({border: "1px solid #DBE1EB"});
             wrongnsi.css({display: "none"});
             wrongns.css({display: "none"});
             descpsong.val(vacio);
+            descpsong.css({border: "1px solid #DBE1EB"});
             wrongdsi.css({display: "none"});
             wrongds.css({display: "none"}); 
             tagsong.val(vacio);
@@ -852,6 +854,34 @@ $(document).ready(function () {
                         
                         console.log("Tratamos de subir una cancion: ");
                         //aqui van las opciones success y error
+                        var music = song[0].files[0];
+
+                        var fileExtension = music.name.substring(music.name.lastIndexOf('.') + 1);
+                
+                        var form = new FormData( uForm[0]);
+                
+                        console.log(music);
+                        console.log(fileExtension);
+                
+                        $.ajax({
+                            url: './upload',
+                            type: 'POST',
+                            // Form data
+                            //datos del formulario
+                            data: form,
+                            //necesario para subir archivos via ajax
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            //una vez finalizado correctamente
+                            success: function(data){
+                                console.log(data);
+                            },
+                            //si ha ocurrido un error
+                            error: function(){
+                
+                            }
+                        });
                     }else{
                         aux8=false;
                         namesong.css({border: "1px solid #DBE1EB"});

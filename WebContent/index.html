@@ -148,10 +148,10 @@
                 <p id="asd118">Upload your own</p>
             </div>
             <a class="colorY" id="x2">x</a>
-            <form id="style-2"> 
+            <form id="uForm"> 
             	<p id="asd201">Upload your track</p>
             	<label for="song">
-                    <input type="file" id="song"/>
+                    <input type="file" id="song" name="song"/>
                 </label>
                 <img id="wrong7" src="public/img/wrong.png">
                 <p id="wrongtrack">Please enter your track</p>
@@ -159,20 +159,21 @@
                 
                 <p id="asd202">What's the track's name?</p>
                 <label for="namesong">
-                    <input type= "text" id="namesong" class="txt"/>
+                    <input type= "text" id="namesong" name="namesong" class="txt"/>
                 </label>
                 <img id="wrong8" src="public/img/wrong1.png">
                 <p id="wrongns">Please enter name's song</p>
                 
                 <p id="asd203">Enter track's description</p>
                 <label for="descpsong">
-                    <input type="text" id="descpsong" class="txt"/>
+                    <input type="text" id="descpsong" name="descpsong" class="txt"/>
                 </label>
                 <img id="wrong9" src="public/img/wrong2.png">
                 <p id="wrongds">Please enter track's description</p>
             	
             	<p id="asd204">Select a track's tag</p>
-                <select id="tagsong">
+                <select id="tagsong" name="tagsong">
+                  <option value="">" "</option>
                   <option value="blues">band</option>
 				  <option value="blues">blues</option>
 				  <option value="classical">classical</option>
