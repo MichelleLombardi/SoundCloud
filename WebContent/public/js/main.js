@@ -44,11 +44,11 @@ $(document).ready(function () {
     var opclo = $("#opclo");
     var logout = $("#logout");//boton para cerrar la sesion
     
-    var uluyo =$("#uploadyourown");
+    var uluyo =$("#uploadyourown"); // abre el modal3
     var modal3 = $("#myModal3"); // modal upload 
     var x2 = $("#x2");// button x que cierra modal3
     var cancel2 = $("#cancel2");// button que cancela y cierra el modal3
-    var uBotton = $("#uBotton"); //botton que abre modalloading y sube la c
+    var uBotton = $("#uBotton"); //botton que abre modalloading y sube la cancion
 
     //click en el boton signin
     signin.click(function () {
