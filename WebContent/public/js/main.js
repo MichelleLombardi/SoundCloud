@@ -73,8 +73,9 @@ $(document).ready(function () {
     });
     
     //click en el boton uploadyourown
+    var auxuluyo=0;
     uluyo.click(function(){
-    	if(uluyo.attr('disabled','true')){
+    	if(auxuluyo==1){
     		modal3.css({display: "block"});
     	}else{
     		modal1.css({display: "block"});
