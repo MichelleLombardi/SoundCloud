@@ -108,7 +108,7 @@ public class Login extends HttpServlet {
         SessionUser user = (SessionUser) session.getAttribute("user");
 
         // Si el token es igual al id de la session y tenemos los datos en la session
-        if(token.equals(session.getId()) && (user != null) ) {
+        if( (user != null) && session.getId().equals(token) ) {
             // obtenemos los datos
             json = user.getJson();
         }

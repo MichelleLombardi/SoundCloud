@@ -122,6 +122,9 @@ public class Signup extends HttpServlet {
                 session.setAttribute("user", user);
 
                 json = user.getJson();
+
+                File directorio = new File(String.valueOf(user.getId()));
+                directorio.mkdir();
             } else {
                 json
                         .add("error", "Datos invalidos");

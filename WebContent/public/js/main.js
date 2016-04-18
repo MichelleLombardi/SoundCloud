@@ -52,15 +52,15 @@ $(document).ready(function () {
     var song = $("#song"); //input para cargar la musica
     var wrongsi = $("#wrong7"); //imagen wrong uluyo song
     var wrongs = $("#wrongtrack"); //parrafo de wrong uluyo song
-    var namesong = $("#namesong"); //input para cargar la musica
+    var namesong = $("#namesong"); //input para nombre cancion
     var wrongnsi = $("#wrong8"); //imagen wrong uluyo name song
-    var wrongns = $("#wrongns"); //parrafo de wrong uluyo bame song
-    var descpsong = $("#descpsong"); //input para cargar la musica
+    var wrongns = $("#wrongns"); //parrafo de wrong uluyo name song
+    var descpsong = $("#descpsong"); //input para descripcion de la musica
     var wrongdsi = $("#wrong9"); //imagen wrong uluyo description
     var wrongds = $("#wrongds"); //parrafo de wrong uluyo description
-    var tagsong = $("#tagsong"); //input para cargar la musica
-    var wrongdti = $("#wrong10"); //imagen wrong uluyo description
-    var wrongt = $("#wrongt"); //parrafo de wrong uluyo description
+    var tagsong = $("#tagsong"); //input para tag de la musica
+    var wrongdti = $("#wrong10"); //imagen wrong uluyo tag
+    var wrongt = $("#wrongt"); //parrafo de wrong uluyo tag
     
 
     //click en el boton signin
@@ -825,6 +825,223 @@ $(document).ready(function () {
             wronge.css({display: "block"});
             wrongei.css({display: "block"});
             aux7 = true;
+        }
+    }
+    
+    
+    //click en el boton upload del modal3
+    var vacio = "";
+    uBotton.click(function () {
+        checkUluyo();
+        if (aux11 == false) {
+            if (aux9 == false) {
+                if(aux10==false){
+                    if(aux8==false){
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                        loading.css({display: "block"});
+                        
+                        console.log("Tratamos de subir una cancion: ");
+                        //aqui van las opciones success y error
+                    }else{
+                        aux8=false;
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }
+                }else{
+                    if(aux8==false){
+                        aux10=false;
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }else{
+                        aux8=false;
+                        aux10=false;
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }
+                }
+            }else{
+                if(aux10==false){
+                    if(aux8==false){
+                        aux9=false;
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }else{
+                        aux9=false;
+                        aux8=false;
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }
+                }else{
+                    if(aux8==false){
+                        aux9=false;
+                        aux10=false;
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }else{
+                        aux9=false;
+                        aux8=false;
+                        aux10=false;
+                        tagsong.css({border: "1px solid #DBE1EB"});
+                        wrongdti.css({display: "none"});
+                        wrongt.css({display: "none"});
+                    }
+                }
+            }//fin aux9
+        }else{
+            if(aux9==false){
+                if(aux10==false){
+                    if(aux8==false){
+                        aux11=false;
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                    }else{
+                        aux11=false;
+                        aux8=false;
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                    }//8
+                }else{
+                    if(aux8==false){
+                        aux11=false;
+                        aux10=false;
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        
+                    }else{
+                        aux11=false;
+                        aux10=false;
+                        aux8=false;
+                        namesong.css({border: "1px solid #DBE1EB"});
+                        wrongnsi.css({display: "none"});
+                        wrongns.css({display: "none"});
+                    }
+                }//10
+            }else{
+               if(aux10==false){
+                    if(aux8==false){
+                        aux11=false;
+                        aux9=false;
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                    }else{
+                        aux11=false;
+                        aux8=false;
+                        aux9=false;
+                        descpsong.css({border: "1px solid #DBE1EB"});
+                        wrongdsi.css({display: "none"});
+                        wrongds.css({display: "none"}); 
+                    }//8
+                }else{
+                    if(aux8==false){
+                        aux11=false;
+                        aux10=false;
+                        aux9=false;
+                        wrongsi.css({display: "none"});
+                        wrongs.css({display: "none"});
+                        
+                    }else{
+                        aux11=false;
+                        aux10=false;
+                        aux8=false;
+                        aux9=false;
+                    }
+                } 
+            }//9
+        }//fin aux11
+    }); //fin oclick uBotton
+
+    //funcion que corrabora que se hayan incluido todos los datos del uluyo
+    var aux8 = false;
+    var aux9 = false;
+    var aux10 = false;
+    var aux11 = false;
+    function checkUluyo() {
+        var songfile = song.val();
+        var ns = namesong.val();
+        var descs = descpsong.val();
+        var tags = tagsong.val();
+        
+        if (songfile.trim() == vacio) {
+            wrongsi.css({display: "block"});
+            wrongs.css({display: "block"});
+            aux8 = true;
+        }
+
+        if (ns.trim() == vacio) {
+            namesong.css({border: "1px solid red"});
+            wrongnsi.css({display: "block"});
+            wrongns.css({display: "block"});
+            aux9 = true;
+        }
+
+        if (descs.trim() == vacio) {
+            descpsong.css({border: "1px solid red"});
+            wrongdsi.css({display: "block"});
+            wrongds.css({display: "block"}); 
+            aux10 = true;
+        }
+
+        if (tags.trim() == vacio) {
+            tagsong.css({border: "1px solid red"});
+            wrongdti.css({display: "block"});
+            wrongt.css({display: "block"});
+            aux11 = true;
         }
     }
 
