@@ -44,6 +44,8 @@ $(document).ready(function () {
     var opclo = $("#opclo");
     var logout = $("#logout");//boton para cerrar la sesion
 
+    console.log(opclo)
+
     //click en el boton signin
     signin.click(function () {
         check.css({display: "none"});
@@ -352,7 +354,7 @@ $(document).ready(function () {
                 }else {
                     if (aux6 == false) {
                         if(aux7==false){
-                            aux5==false;
+                            aux5=false;
                             caFN.css({border: "1px solid #DBE1EB"});
                             wrongfni.css({display: "none"});
                             wrongfn.css({display: "none"});
@@ -677,7 +679,8 @@ $(document).ready(function () {
     
     // Esto verifica si hay una sesion guardada
     // y en tal caso la inicia si existe
-    var user = JSON.parse(localStorage.user);
+    var user = JSON.parse(localStorage.user ? localStorage.user : {});
+    console.log(user);
     console.log("Hay una sesion activa?:");
     if( user ) {
         $.ajax({
@@ -715,10 +718,9 @@ $(document).ready(function () {
             }
         })
     }
-    
+
     // Cuando se hace click en logout
     opclo.click(function() {
-        var user = JSON.parse(localStorage.user);
         console.log("Cerraremos la sesion:");
         $.ajax({
             url: "./login",

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 @WebServlet("/signup")
 public class Signup extends HttpServlet {
@@ -78,7 +79,7 @@ public class Signup extends HttpServlet {
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        String birthday = request.getParameter("birthday");
+        Date birthday = Date.valueOf(request.getParameter("birthday"));
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
 
