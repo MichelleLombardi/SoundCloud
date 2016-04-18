@@ -123,8 +123,12 @@ public class Signup extends HttpServlet {
 
                 json = user.getJson();
 
+                // Ubicacion de la carpeta
+                System.out.println(System.getProperty("user.dir") + "/" + user.getId() + "/" );
+                
                 File directorio = new File(String.valueOf(user.getId()));
                 directorio.mkdir();
+                
             } else {
                 json
                         .add("error", "Datos invalidos");
