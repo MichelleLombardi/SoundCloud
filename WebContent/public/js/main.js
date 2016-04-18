@@ -47,6 +47,8 @@ $(document).ready(function () {
     var uluyo =$("#uploadyourown");
     var modal3 = $("#myModal3"); // modal upload 
     var x2 = $("#x2");// button x que cierra modal3
+    var cancel2 = $("#cancel2");// button que cancela y cierra el modal3
+    var uBotton = $("#uBotton"); //botton que abre modalloading y sube la c
 
     //click en el boton signin
     signin.click(function () {
@@ -117,7 +119,7 @@ $(document).ready(function () {
     //click en el boton x del modal 2
     x1.click(function () { modal2.css({display: "none"}); });
     
-    //click en el boton x del modal 2
+    //click en el boton x del modal 3
     x2.click(function () { modal3.css({display: "none"}); });
 
     //click en el boton canceldel modal1
@@ -125,6 +127,9 @@ $(document).ready(function () {
 
     //click en el boton cancel del modal2
     cancel1.click(function () { modal2.css({display: "none"}); });
+    
+    //click en el boton cancel del modal3
+    cancel2.click(function () { modal3.css({display: "none"}); });
 
     //click en el boton sign in del modal1
     var vacio = "";

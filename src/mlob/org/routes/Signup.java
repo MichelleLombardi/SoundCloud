@@ -61,7 +61,14 @@ public class Signup extends HttpServlet {
 
     private String createQuery = "" +
             "INSERT INTO " +
-            "   app_user " +
+            "   app_user (" +
+            "   id_app_user," + 
+            "   name_app_user, " +
+            "   lastname_app_user," + 
+            "   birthday_app_user, " +
+            "   email_app_user, " +
+            "   password_app_user" +
+            ") " +
             "VALUES( " +
             "   ((SELECT COUNT(*) FROM app_user) + 1), " +    // Contar cuantos registros hay para saber el proximo id
             "   ?, " +  // FirstName
