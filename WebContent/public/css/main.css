@@ -454,6 +454,17 @@ body {
     width: 345px;
 }
 
+#anuncio3 {
+    display: none;
+    position: absolute;
+    top: 130px;
+    left: 25px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    width: 345px;
+}
+
 #asd12 {
     position: absolute;
     text-align: center;

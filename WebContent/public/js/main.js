@@ -61,6 +61,7 @@ $(document).ready(function () {
     var tagsong = $("#tagsong"); //input para tag de la musica
     var wrongdti = $("#wrong10"); //imagen wrong uluyo tag
     var wrongt = $("#wrongt"); //parrafo de wrong uluyo tag
+    var anuncio3 = $("#anuncio3");//div anuncion error uluyo
     
 
     //click en el boton signin
@@ -851,7 +852,6 @@ $(document).ready(function () {
                         tagsong.css({border: "1px solid #DBE1EB"});
                         wrongdti.css({display: "none"});
                         wrongt.css({display: "none"});
-                        loading.css({display: "block"});
                         
                         console.log("Tratamos de subir una cancion: ");
                         //aqui van las opciones success y error
@@ -863,7 +863,9 @@ $(document).ready(function () {
                 
                         console.log(music);
                         console.log(fileExtension);
-                
+                        
+                        loading.css({display: "block"});
+                        
                         $.ajax({
                             url: './upload',
                             type: 'POST',
@@ -876,11 +878,27 @@ $(document).ready(function () {
                             processData: false,
                             //una vez finalizado correctamente
                             success: function(data){
-                                console.log(data);
+                                setTimeout(function(){ 
+    	                        	loading.css({display: "none"});
+    	                            modal3.css({display: "none"});
+    	                            console.log(data);
+                                }, 5000);
                             },
                             //si ha ocurrido un error
                             error: function(){
-                
+                                song.val(vacio);
+                                namesong.val(vacio);
+                                descpsong.val(vacio);
+                                tagsong.val(vacio);
+                                setTimeout(function(){ 
+    	                            loading.css({display: "none"});
+    	                            anuncio3.css({display: "block"});
+    	                            
+    	
+    	                            setTimeout(function () {
+    	                                anuncio3.css({display: "none"});
+    	                            }, 3000);
+                                }, 5000);
                             }
                         });
                     }else{
