@@ -40,7 +40,7 @@ $(document).ready(function () {
     var anuncio2 = $("#anuncio2");//div anuncion error signin
     
     
-    var logoutdiv = $("#logoutdiv");
+    var lo = $("#Logout");
     var opclo = $("#opclo");
     var logout = $("#logout");//boton para cerrar la sesion
 
@@ -143,9 +143,8 @@ $(document).ready(function () {
 	
 	                            signin.css({"display":"none"});
 	                            createaccount.css({"display":"none"});
-	                            logoutdiv.css({"display":"block"});
+	                            lo.css({"display":"inline"});
 	                            logoutdiv.text(data.nombre+" "+data.apellido);
-	                            opclo.css({"display":"block"});
                             }, 5000);
                         }
                         else {
@@ -694,24 +693,21 @@ $(document).ready(function () {
                     console.log("Hay una sesion activa?: si");
                     signin.css({"display":"none"});
                     createaccount.css({"display":"none"});
-                    logoutdiv.css({"display":"block"});
+                    lo.css({"display":"inline"});
                     logoutdiv.text(data.nombre+" "+data.apellido);
-                    opclo.css({"display":"block"});
                 }
                 else {
                     var error = data.error;
                     localStorage.clear();
                     console.log(error);
                     console.log("Hay una sesion activa?: no");
-                    logoutdiv.css({"display":"none"});
-                    opclo.css({"display":"none"});
+                    lo.css({"display":"none"});
                 }
             },
             error: function (err) {
                 localStorage.clear();
                 console.log(err);
-                logoutdiv.css({"display":"none"});
-                opclo.css({"display":"none"});
+                lo.css({"display":"none"});
             }
         })
     }
@@ -730,8 +726,7 @@ $(document).ready(function () {
                     console.log(data);
                     signin.css({"display":"block"});
                     createaccount.css({"display":"block"});
-                    logoutdiv.css({"display":"none"});
-                    opclo.css({"display":"none"});
+                    lo.css({"display":"none"});
                 }
                 else {
                 	var error = data.error;
@@ -740,8 +735,7 @@ $(document).ready(function () {
                     console.log("Hay una sesion activa?: no");
                     signin.css({"display":"block"});
                     createaccount.css({"display":"block"});
-                    logoutdiv.css({"display":"none"});
-                    opclo.css({"display":"none"});
+                    lo.css({"display":"none"});
                 }
             },
             error: function (err) {
@@ -751,8 +745,7 @@ $(document).ready(function () {
                 console.log("Hay una sesion activa?: no");
                 signin.css({"display":"block"});
                 createaccount.css({"display":"block"});
-                logoutdiv.css({"display":"none"});
-                opclo.css({"display":"none"});
+                lo.css({"display":"none"});
             }
         })
     });
