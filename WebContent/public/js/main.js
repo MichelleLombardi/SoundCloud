@@ -63,6 +63,8 @@ $(document).ready(function () {
     var wrongt = $("#wrongt"); //parrafo de wrong uluyo tag
     var anuncio3 = $("#anuncio3");//div anuncion error uluyo
     
+    var perfil =$("#perfil");
+    
 
     //click en el boton signin
     signin.click(function () {
@@ -160,6 +162,9 @@ $(document).ready(function () {
             }
         }, 500);
     });
+    
+    //click en el nombre de la persona logueada
+    logoutdiv.click(function(){perfil.css({display: "block"})});
 
     //click en el boton x del modal 1
     x.click(function () { modal1.css({display: "none"}); });

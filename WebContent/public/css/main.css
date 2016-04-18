@@ -1011,3 +1011,13 @@ body {
     width: 48px;
     height: 17px;  
 }
+
+.pb{
+    position: absolute;
+    top: 469px;
+    left: 53px;
+    width: 1240px;
+    height: 464px;
+    background: white;
+    display: none;
+}
