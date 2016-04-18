@@ -110,7 +110,7 @@ public class Upload extends HttpServlet {
             
             Object[][] table = jdbc.executeQuery(getMediaId, url, timestamp, descpsong, 0, namesong, tagsong);
             
-            jdbc.execute(createUserMedia, Integer.parseInt(table[1][0]), user.getId());
+            jdbc.execute(createUserMedia, Integer.parseInt((String) table[1][0]), user.getId());
             
             json.add("url", url);
 
