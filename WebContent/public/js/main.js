@@ -49,6 +49,19 @@ $(document).ready(function () {
     var x2 = $("#x2");// button x que cierra modal3
     var cancel2 = $("#cancel2");// button que cancela y cierra el modal3
     var uBotton = $("#uBotton"); //botton que abre modalloading y sube la cancion
+    var song = $("#song"); //input para cargar la musica
+    var wrongsi = $("#wrong7"); //imagen wrong uluyo song
+    var wrongs = $("#wrongtrack"); //parrafo de wrong uluyo song
+    var namesong = $("#namesong"); //input para cargar la musica
+    var wrongnsi = $("#wrong8"); //imagen wrong uluyo name song
+    var wrongns = $("#wrongns"); //parrafo de wrong uluyo bame song
+    var descpsong = $("#descpsong"); //input para cargar la musica
+    var wrongdsi = $("#wrong9"); //imagen wrong uluyo description
+    var wrongds = $("#wrongds"); //parrafo de wrong uluyo description
+    var tagsong = $("#tagsong"); //input para cargar la musica
+    var wrongdti = $("#wrong10"); //imagen wrong uluyo description
+    var wrongt = $("#wrongt"); //parrafo de wrong uluyo description
+    
 
     //click en el boton signin
     signin.click(function () {
@@ -76,9 +89,39 @@ $(document).ready(function () {
     var auxuluyo=0;
     uluyo.click(function(){
     	if(auxuluyo==1){
+    	    var vacio = "";
+    	    song.val(vacio);
+            wrongsi.css({display: "none"});
+            wrongs.css({display: "none"});
+            namesong.val(vacio);
+            wrongnsi.css({display: "none"});
+            wrongns.css({display: "none"});
+            descpsong.val(vacio);
+            wrongdsi.css({display: "none"});
+            wrongds.css({display: "none"}); 
+            tagsong.val(vacio);
+            wrongdti.css({display: "none"});
+            wrongt.css({display: "none"});
     		modal3.css({display: "block"});
     	}else{
-    		modal1.css({display: "block"});
+    		check.css({display: "none"});
+            signinEmail.css({border: "1px solid #DBE1EB"});
+            wrong.css({display: "none"});
+            wrongemail.css({display: "none"});
+            signinPass.css({border: "1px solid #DBE1EB"});
+            wrong1.css({display: "none"});
+            wrongpass.css({display: "none"});
+            var vacio = "";
+            signinEmail.val(vacio);
+            signinPass.val(vacio);
+            modal1.css({display: "block"});
+            setInterval(function () {
+                if (signinPass.val().length == 20) {
+                    check.css({display: "block"});
+                } else {
+                    check.css({display: "none"});
+                }
+            }, 500);
     	}
     });
 
@@ -168,18 +211,18 @@ $(document).ready(function () {
 	                            logoutdiv.css({"display":"inline"});
 	                            logoutdiv.text(data.nombre+" "+data.apellido);
 	                            opclo.css({"display":"block"});
-	                            uluyo.attr('disabled','true');
+	                            auxuluyo=1;
                             }, 5000);
                         }
                         else {
                             var error = data.error;
                             signinEmail.val(vacio);
                             signinPass.val(vacio);
-                            
+                           
                             setTimeout(function(){ 
 	                            loading.css({display: "none"});
 	                            anuncio.css({display: "block"});
-	                            uluyo.attr('disabled','false');
+	                            auxuluyo=0;
 	
 	                            setTimeout(function () {
 	                                anuncio.css({display: "none"});
@@ -196,7 +239,7 @@ $(document).ready(function () {
                         setTimeout(function(){ 
 	                        loading.css({display: "none"});
 	                        anuncio.css({display: "block"});
-	                        uluyo.attr('disabled','false');
+	                        auxuluyo=0;
 	
 	                        setTimeout(function () {
 	                            anuncio.css({display: "none"});
@@ -296,7 +339,7 @@ $(document).ready(function () {
             	                            logoutdiv.css({"display":"inline"});
             	                            logoutdiv.text(data.nombre+" "+data.apellido);
             	                            opclo.css({"display":"block"});
-            	                            uluyo.attr('disabled','true');
+            	                            auxuluyo=1;
                                             
                                         }, 5000);
                                     }
@@ -311,7 +354,7 @@ $(document).ready(function () {
                                         setTimeout(function(){
                                             loading.css({display: "none"});
             	                            anuncio2.css({display: "block"});
-            	                            uluyo.attr('disabled','false');
+            	                             auxuluyo=0;
     
                                             setTimeout(function () {
                                                 anuncio2.css({display: "none"});
@@ -331,7 +374,7 @@ $(document).ready(function () {
                                         setTimeout(function(){
                                             loading.css({display: "none"});
             	                            anuncio2.css({display: "block"});
-            	                            uluyo.attr('disabled','false');
+            	                             auxuluyo=0;
     
                                             setTimeout(function () {
                                                 anuncio2.css({display: "none"});
@@ -821,6 +864,7 @@ $(document).ready(function () {
                     logoutdiv.css({"display":"inline"});
                     logoutdiv.text(data.nombre+" "+data.apellido);
                     opclo.css({"display":"block"});
+                    auxuluyo=1;
                 }
                 else {
                     var error = data.error;
@@ -829,6 +873,7 @@ $(document).ready(function () {
                     console.log("Hay una sesion activa?: no");
                     logoutdiv.css({"display":"none"});
                     opclo.css({"display":"none"});
+                    auxuluyo=0;
                 }
             },
             error: function (err) {
@@ -836,6 +881,7 @@ $(document).ready(function () {
                 console.log(err);
                 logoutdiv.css({"display":"none"});
                 opclo.css({"display":"none"});
+                auxuluyo=0;
             }
         })
     }
@@ -855,6 +901,7 @@ $(document).ready(function () {
                     createaccount.css({"display":"block"});
                     logoutdiv.css({"display":"none"});
                     opclo.css({"display":"none"});
+                    auxuluyo=0;
                 }
                 else {
                 	var error = data.error;
@@ -865,6 +912,7 @@ $(document).ready(function () {
                     createaccount.css({"display":"block"});
                     logoutdiv.css({"display":"none"});
                     opclo.css({"display":"none"});
+                    auxuluyo=0;
                 }
             },
             error: function (err) {
@@ -876,6 +924,7 @@ $(document).ready(function () {
                 createaccount.css({"display":"block"});
                 logoutdiv.css({"display":"none"});
                 opclo.css({"display":"none"});
+                auxuluyo=0;
             }
         })
     });
