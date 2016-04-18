@@ -165,10 +165,6 @@ $(document).ready(function () {
 	                            signin.css({"display":"none"});
 	                            createaccount.css({"display":"none"});
 	                            logoutdiv.css({"display":"inline"});
-	                            
-	                            data.nombre.toLowerCase();
-	                            data.nombre.charAt(0).toUpperCase() + data.nombre.slice(1);
-	                            
 	                            logoutdiv.text(data.nombre+" "+data.apellido);
 	                            opclo.css({"display":"block"});
 	                            uluyo.attr('disabled','true');
@@ -287,20 +283,21 @@ $(document).ready(function () {
                                 success: function (data) {
                                     // Si no hay error
                                     if( !data.error ) {  // si el email no existe
-                                        loading.css({display: "none"});
-                                        modal2.css({display: "none"});
-                                        
-                                        caFN.val(vacio);
-                                        caLN.val(vacio);
-                                        caB.val(vacio);
-                                        caE.val(vacio);
-                                        caP.val(vacio);
-
-                                        localStorage.user = JSON.stringify(data);
-                                        console.log(data);
-
-                                        signin.css({"display":"none"});
-                                        createaccount.css({"display":"none"});
+                                        setTimeout(function(){
+                                            loading.css({display: "none"});
+                                            modal2.css({display: "none"});
+                                            
+                                            localStorage.user = JSON.stringify(data);
+                                            console.log(data);
+                                            
+                                            signin.css({"display":"none"});
+            	                            createaccount.css({"display":"none"});
+            	                            logoutdiv.css({"display":"inline"});
+            	                            logoutdiv.text(data.nombre+" "+data.apellido);
+            	                            opclo.css({"display":"block"});
+            	                            uluyo.attr('disabled','true');
+                                            
+                                        }, 5000);
                                     }
                                     else {
                                         var error = data.error;
@@ -309,28 +306,37 @@ $(document).ready(function () {
                                         caB.val(vacio);
                                         caE.val(vacio);
                                         caP.val(vacio);
-                                        loading.css({display: "none"});
-                                        anuncio.css({display: "block"});
-
-                                        setTimeout(function () {
-                                            anuncio.css({display: "none"});
-                                        }, 3000);
-
+                                        
+                                        setTimeout(function(){
+                                            loading.css({display: "none"});
+            	                            anuncio2.css({display: "block"});
+            	                            uluyo.attr('disabled','false');
+    
+                                            setTimeout(function () {
+                                                anuncio2.css({display: "none"});
+                                            }, 3000);
+                                        }, 5000);
                                         console.log(error);
                                     }
                                 },
                                 error: function (err) {
-                                    loading.css({display: "none"});
-                                    caFN.val(vacio);
-                                    caLN.val(vacio);
-                                    caB.val(vacio);
-                                    caE.val(vacio);
-                                    caP.val(vacio);
-                                    anuncio2.css({display: "block"});
-                                    setTimeout(function () {
-                                        anuncio2.css({display: "none"});
-                                    }, 3000);
-                                    console.log(err);
+                                    
+                                        caFN.val(vacio);
+                                        caLN.val(vacio);
+                                        caB.val(vacio);
+                                        caE.val(vacio);
+                                        caP.val(vacio);
+                                        
+                                        setTimeout(function(){
+                                            loading.css({display: "none"});
+            	                            anuncio2.css({display: "block"});
+            	                            uluyo.attr('disabled','false');
+    
+                                            setTimeout(function () {
+                                                anuncio2.css({display: "none"});
+                                            }, 3000);
+                                        }, 5000);
+                                        console.log(err);
                                 }
                             });
                         }else {
@@ -567,80 +573,165 @@ $(document).ready(function () {
                             wrongp.css({display: "none"});
                         }
                     }else{
-                        if(aux4==false){
-                            if(aux5==false){
-                                if(aux7==false){
-                                    aux3=false;
-                                    aux6=false;
-                                    caB.css({border: "1px solid #DBE1EB"});
-                                    wrongbi.css({display: "none"});
-                                    wrongb.css({display: "none"});
-                                    caLN.css({border: "1px solid #DBE1EB"});
-                                    wronglni.css({display: "none"});
-                                    wrongln.css({display: "none"});
-                                    caE.css({border: "1px solid #DBE1EB"});
-                                    wrongei.css({display: "none"});
-                                    wronge.css({display: "none"});
-                                }else{
-                                    aux3=false;
-                                    aux6=false;
-                                    aux7=false;
-                                    caB.css({border: "1px solid #DBE1EB"});
-                                    wrongbi.css({display: "none"});
-                                    wrongb.css({display: "none"});
-                                    caLN.css({border: "1px solid #DBE1EB"});
-                                    wronglni.css({display: "none"});
-                                    wrongln.css({display: "none"});
-                                }
-                            }else{
-                                if(aux4==false){
-                                    if(aux7==false){
-                                        aux3=false;
-                                        aux5=false;
-                                        aux6=false;
-                                        caE.css({border: "1px solid #DBE1EB"});
-                                        wrongei.css({display: "none"});
-                                        wronge.css({display: "none"});
-                                        caLN.css({border: "1px solid #DBE1EB"});
-                                        wronglni.css({display: "none"});
-                                        wrongln.css({display: "none"});
-                                    }else{
-                                        aux3=false;
-                                        aux5=false;
-                                        aux6=false;
-                                        aux7=false;
-                                        caLN.css({border: "1px solid #DBE1EB"});
-                                        wronglni.css({display: "none"});
-                                        wrongln.css({display: "none"});
-                                    }
-                                }else{
-                                    if(aux5==false){
-                                        if(aux7==false){
-                                            aux3=false;
-                                            aux4=false;
-                                            aux6=false;
-                                            caB.css({border: "1px solid #DBE1EB"});
-                                            wrongbi.css({display: "none"});
-                                            wrongb.css({display: "none"});
-                                            caE.css({border: "1px solid #DBE1EB"});
-                                            wrongei.css({display: "none"});
-                                            wronge.css({display: "none"});
-                                        }else{
-                                            aux3=false;
-                                            aux4=false;
-                                            aux6=false;
-                                            aux7=false;
-                                            caB.css({border: "1px solid #DBE1EB"});
-                                            wrongbi.css({display: "none"});
-                                            wrongb.css({display: "none"});
-                                        }
-                                    }else{/*5*/}
-                                }
-                            }
-                        }else{/*4*/}
+                        if(aux7==false){
+                            aux3=false;
+                            aux6=false;
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux6=false;
+                            aux7=false;
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                        }
                     }
-                }else{/*aux5*/}
-            }else{/*4*/}
+                }else{
+                    if(aux6==false){
+                        if(aux7==false){
+                            aux3=false;
+                            aux5=false;
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux5=false;
+                            aux7=false;
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }
+                    }else{
+                        if(aux7==false){
+                            aux3=false;
+                            aux5=false;
+                            aux6=false;
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux5=false;
+                            aux6=false;
+                            aux7=false;
+                            caLN.css({border: "1px solid #DBE1EB"});
+                            wronglni.css({display: "none"});
+                            wrongln.css({display: "none"});
+                        }
+                    }
+                }
+            }else{
+                if(aux5==false){
+                    if(aux6==false){
+                        if(aux7==false){
+                            aux3=false;
+                            aux4=false;
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux4=false;
+                            aux7=false;
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                        }
+                    }else{
+                        if(aux7==false){
+                            aux3=false;
+                            aux4=false;
+                            aux6=false;
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux4=false;
+                            aux7=false;
+                            aux6=false;
+                            caB.css({border: "1px solid #DBE1EB"});
+                            wrongbi.css({display: "none"});
+                            wrongb.css({display: "none"});
+                        }
+                        
+                    }
+                }else{
+                    if(aux6==false){
+                        if(aux7==false){
+                            aux3=false;
+                            aux4=false;
+                            aux5=false;
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux4=false;
+                            aux5=false;
+                            aux7=false;
+                            caP.css({border: "1px solid #DBE1EB"});
+                            wrongpi.css({display: "none"});
+                            wrongp.css({display: "none"});
+                        }
+                    }else{
+                        if(aux7==false){
+                            aux3=false;
+                            aux4=false;
+                            aux5=false;
+                            aux6=false;
+                            caE.css({border: "1px solid #DBE1EB"});
+                            wrongei.css({display: "none"});
+                            wronge.css({display: "none"});
+                        }else{
+                            aux3=false;
+                            aux4=false;
+                            aux5=false;
+                            aux6=false;
+                            aux7=false;
+                        }
+                    }
+                }
+            }
         }
     }); //fin onclick caBotton
 
@@ -708,7 +799,7 @@ $(document).ready(function () {
     
     // Esto verifica si hay una sesion guardada
     // y en tal caso la inicia si existe
-    var user = JSON.parse(localStorage.user ? localStorage.user : {});
+    var user = JSON.parse(localStorage.user ? localStorage.user : "{}");
     console.log(user);
     console.log("Hay una sesion activa?:");
     if( user ) {
