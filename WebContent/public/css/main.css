@@ -287,7 +287,17 @@ body {
 #asd9 {
     position: absolute;
     top: 30px;
-    left: 300px;
+    left: 280px;
+    color: white;
+    font-family: Arial, serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#asd119 {
+    position: absolute;
+    top: 30px;
+    left: 200px;
     color: white;
     font-family: Arial, serif;
     font-size: 16px;
@@ -412,8 +422,8 @@ body {
 
 #x {
     position: absolute;
-    top: 163px;
-    left: 860px;
+    top:4px; 
+    left:367px;
     -webkit-border-radius: 200px 200px 200px 200px;
     -webkit-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
@@ -683,8 +693,8 @@ body {
 
 #x1 {
     position: absolute;
-    top: 163px;
-    left: 860px;
+    top:4px; 
+    left:367px;
     -webkit-border-radius: 200px 200px 200px 200px;
     -webkit-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
@@ -705,36 +715,36 @@ body {
 }
 
 #logoutdiv {
-    /*background-color: rgba(255, 0, 0, 0.5);*/
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(232,232,232,0.4); /* Black w/ opacity */
     position:absolute;
     display: none;
     top: 40px;
     left: 1029px;
     width: 183px;
-    height: 30px;
+    height: 18px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: normal;
     font-style: italic;
-    padding: 5px 10px;
-    color:white;
+    padding: 10px 10px;
+    color: #E8E8E8;
+    text-align: center;
+    border-radius: 4px;
     
 }
 
 #logoutdiv:hover {
     cursor: pointer;
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(232,232,232,0.4); /* Black w/ opacity */
+    color: white;
 }
 
 #opclo {
     position: absolute;
     display: none;
-    top: 15px;
-    width: 100%;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(232,232,232,0.4); /* Black w/ opacity */
-    
+    top: 84px;
+    left: 1150px;
+    width: 48px;
+    height: 15px;  
 }
+

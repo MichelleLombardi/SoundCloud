@@ -41,6 +41,7 @@ $(document).ready(function () {
     
     
     var logoutdiv = $("#logoutdiv");
+    var opclo = $("#opclo");
     var logout = $("#logout");//boton para cerrar la sesion
 
     //click en el boton signin
@@ -133,28 +134,33 @@ $(document).ready(function () {
                     },
                     success: function (data) {
                         if( !data.error ) {
-                            loading.css({display: "none"});
-                            modal1.css({display: "none"});
+                            setTimeout(function(){ 
+	                        	loading.css({display: "none"});
+	                            modal1.css({display: "none"});
 
-                            localStorage.user = JSON.stringify(data);
-                            console.log(data);
-
-                            signin.css({"display":"none"});
-                            createaccount.css({"display":"none"});
-                            logoutdiv.css({"display":"block"});
-                            logoutdiv.text("hola");
-                            
+	                            localStorage.user = JSON.stringify(data);
+	                            console.log(data);
+	
+	                            signin.css({"display":"none"});
+	                            createaccount.css({"display":"none"});
+	                            logoutdiv.css({"display":"block"});
+	                            logoutdiv.text(data.nombre+" "+data.apellido);
+	                            opclo.css({"display":"block"});
+                            }, 5000);
                         }
                         else {
                             var error = data.error;
                             signinEmail.val(vacio);
                             signinPass.val(vacio);
-                            loading.css({display: "none"});
-                            anuncio.css({display: "block"});
-
-                            setTimeout(function () {
-                                anuncio.css({display: "none"});
-                            }, 3000);
+                            
+                            setTimeout(function(){ 
+	                            loading.css({display: "none"});
+	                            anuncio.css({display: "block"});
+	
+	                            setTimeout(function () {
+	                                anuncio.css({display: "none"});
+	                            }, 3000);
+                            }, 5000);
 
                             console.log(error);
                         }
@@ -162,12 +168,15 @@ $(document).ready(function () {
                     error: function (err) {
                         signinEmail.val(vacio);
                         signinPass.val(vacio);
-                        loading.css({display: "none"});
-                        anuncio.css({display: "block"});
-
-                        setTimeout(function () {
-                            anuncio.css({display: "none"});
-                        }, 3000);
+                        
+                        setTimeout(function(){ 
+	                        loading.css({display: "none"});
+	                        anuncio.css({display: "block"});
+	
+	                        setTimeout(function () {
+	                            anuncio.css({display: "none"});
+	                        }, 3000);
+                        }, 5000);
                         console.log(err);
                     }
                 });
@@ -209,7 +218,7 @@ $(document).ready(function () {
             aux2 = true;
         }
     }
-
+ 
     //click en el boton create account del modal2
     caBotton.click(function () {
         checkCreateAccount();
@@ -682,24 +691,33 @@ $(document).ready(function () {
                 if( !data.error ) {
                     localStorage.user = JSON.stringify(data);
                     console.log(data);
+                    console.log("Hay una sesion activa?: si");
                     signin.css({"display":"none"});
                     createaccount.css({"display":"none"});
+                    logoutdiv.css({"display":"block"});
+                    logoutdiv.text(data.nombre+" "+data.apellido);
+                    opclo.css({"display":"block"});
                 }
                 else {
                     var error = data.error;
                     localStorage.clear();
                     console.log(error);
+                    console.log("Hay una sesion activa?: no");
+                    logoutdiv.css({"display":"none"});
+                    opclo.css({"display":"none"});
                 }
             },
             error: function (err) {
                 localStorage.clear();
                 console.log(err);
+                logoutdiv.css({"display":"none"});
+                opclo.css({"display":"none"});
             }
         })
     }
     
     // Cuando se hace click en logout
-    logout.click(function() {
+    opclo.click(function() {
         var user = JSON.parse(localStorage.user);
         console.log("Cerraremos la sesion:");
         $.ajax({
@@ -712,31 +730,25 @@ $(document).ready(function () {
                     console.log(data);
                     signin.css({"display":"block"});
                     createaccount.css({"display":"block"});
-                    
-                    // Falta hacer display: none de los div del nombre
-                    // y logout pero aun no existen
+                    logoutdiv.css({"display":"none"});
+                    opclo.css({"display":"none"});
                 }
                 else {
-                    var error = data.error;
+                	var error = data.error;
                     localStorage.clear();
-                    signin.css({"display":"block"});
-                    createaccount.css({"display":"block"});
-                    
-                    // Falta hacer display: none de los div del nombre
-                    // y logout pero aun no existen
-                    
                     console.log(error);
+                    console.log("Hay una sesion activa?: no");
+                    logoutdiv.css({"display":"none"});
+                    opclo.css({"display":"none"});
                 }
             },
             error: function (err) {
+            	var error = data.error;
                 localStorage.clear();
-                signin.css({"display":"block"});
-                createaccount.css({"display":"block"});
-                
-                // Falta hacer display: none de los div del nombre
-                // y logout pero aun no existen
-                
-                console.log(err);
+                console.log(error);
+                console.log("Hay una sesion activa?: no");
+                logoutdiv.css({"display":"none"});
+                opclo.css({"display":"none"});
             }
         })
     });
