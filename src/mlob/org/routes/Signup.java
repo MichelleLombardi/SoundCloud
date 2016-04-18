@@ -63,14 +63,13 @@ public class Signup extends HttpServlet {
             "INSERT INTO " +
             "   app_user " +
             "VALUES( " +
-            "   null, " +    // Contar cuantos registros hay para saber el proximo id
+            "   ((SELECT COUNT(*) FROM app_user) + 1), " +    // Contar cuantos registros hay para saber el proximo id
             "   ?, " +  // FirstName
             "   ?, " +  // LastName
             "   ?, " +  // Birthday
             "   ?, " +  // Email
             "   ? " +   // Pass
-            ")"
-            ;
+            ")";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();

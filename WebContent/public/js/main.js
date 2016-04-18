@@ -45,7 +45,8 @@ $(document).ready(function () {
     var logout = $("#logout");//boton para cerrar la sesion
     
     var uluyo =$("#uploadyourown");
-    var modal3 = $("#myModal3"); // modal sign in
+    var modal3 = $("#myModal3"); // modal upload 
+    var x2 = $("#x2");// button x que cierra modal3
 
     //click en el boton signin
     signin.click(function () {
@@ -115,6 +116,9 @@ $(document).ready(function () {
 
     //click en el boton x del modal 2
     x1.click(function () { modal2.css({display: "none"}); });
+    
+    //click en el boton x del modal 2
+    x2.click(function () { modal3.css({display: "none"}); });
 
     //click en el boton canceldel modal1
     cancel.click(function () { modal1.css({display: "none"}); });
