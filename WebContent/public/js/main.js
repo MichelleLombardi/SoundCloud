@@ -697,6 +697,9 @@ $(document).ready(function () {
         if (event.target == modal2[0]) {
             modal2.css({display: "none"});
         }
+        if (event.target == modal3[0]) {
+            modal3.css({display: "none"});
+        }
     });
     
     // Esto verifica si hay una sesion guardada
