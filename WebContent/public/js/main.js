@@ -165,6 +165,10 @@ $(document).ready(function () {
 	                            signin.css({"display":"none"});
 	                            createaccount.css({"display":"none"});
 	                            logoutdiv.css({"display":"inline"});
+	                            
+	                            data.nombre.toLowerCase();
+	                            data.nombre.charAt(0).toUpperCase() + data.nombre.slice(1);
+	                            
 	                            logoutdiv.text(data.nombre+" "+data.apellido);
 	                            opclo.css({"display":"block"});
 	                            uluyo.attr('disabled','true');
