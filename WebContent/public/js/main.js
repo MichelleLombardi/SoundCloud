@@ -43,8 +43,9 @@ $(document).ready(function () {
     var logoutdiv = $("#logoutdiv");
     var opclo = $("#opclo");
     var logout = $("#logout");//boton para cerrar la sesion
-
-    console.log(opclo)
+    
+    var uluyo =$("#uploadyourown");
+    var modal3 = $("#myModal3"); // modal sign in
 
     //click en el boton signin
     signin.click(function () {
@@ -66,6 +67,11 @@ $(document).ready(function () {
                 check.css({display: "none"});
             }
         }, 500);
+    });
+    
+    //click en el boton uploadyourown
+    uluyo.click(function(){
+    	modal3.css({display: "block"});
     });
 
     //click en el boton create account
