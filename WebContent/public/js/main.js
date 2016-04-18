@@ -143,7 +143,7 @@ $(document).ready(function () {
 	
 	                            signin.css({"display":"none"});
 	                            createaccount.css({"display":"none"});
-	                            logoutdiv.css({"display":"block"});
+	                            logoutdiv.css({"display":"inline"});
 	                            logoutdiv.text(data.nombre+" "+data.apellido);
 	                            opclo.css({"display":"block"});
                             }, 5000);
@@ -694,7 +694,7 @@ $(document).ready(function () {
                     console.log("Hay una sesion activa?: si");
                     signin.css({"display":"none"});
                     createaccount.css({"display":"none"});
-                    logoutdiv.css({"display":"block"});
+                    logoutdiv.css({"display":"inline"});
                     logoutdiv.text(data.nombre+" "+data.apellido);
                     opclo.css({"display":"block"});
                 }
