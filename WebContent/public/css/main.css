@@ -226,6 +226,7 @@ body {
     color: #E8E8E8;
 }
 
+
 #asd3 {
     position: absolute;
     top: 235px;
@@ -234,6 +235,10 @@ body {
     font-family: Lucida Sans Unicode, serif;
     font-size: 40px;
 }
+
+
+
+
 
 #iconImage {
     position: absolute;
@@ -295,6 +300,16 @@ body {
 }
 
 #asd119 {
+    position: absolute;
+    top: 30px;
+    left: 200px;
+    color: white;
+    font-family: Arial, serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#asd118 {
     position: absolute;
     top: 30px;
     left: 200px;
@@ -431,7 +446,24 @@ body {
     font-weight: bold;
 }
 
+#x2 {
+    position: absolute;
+    top:4px; 
+    left:367px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    -webkit-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+}
+
 #asd13 {
+    width: 400px;
+    height: 380px;
+}
+
+
+#asd113 {
     width: 400px;
     height: 380px;
 }
@@ -444,7 +476,25 @@ body {
     height: 38px;
 }
 
+#asd114 {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 38px;
+    height: 38px;
+}
+
 #asd15 {
+    position: absolute;
+    top: 13px;
+    left: 61px;
+    color: white;
+    font-family: Arial, serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+#asd115 {
     position: absolute;
     top: 13px;
     left: 61px;
@@ -473,6 +523,15 @@ body {
     font-size: 14px;
 }
 
+#asd201 {
+    position: absolute;
+    top: 10px;
+    left: 33px;
+    color: #330033;
+    font-family: Arial, serif;
+    font-size: 14px;
+}
+
 #createaccountFN {
     position: absolute;
     top: 43px;
@@ -480,7 +539,23 @@ body {
     width: 305px;
 }
 
+#song {
+    position: absolute;
+    top: 43px;
+    left: 33px;
+    width: 305px;
+}
+
 #wrong2 {
+    display: none;
+    position: absolute;
+    top: 78px;
+    left: 34px;
+    width: 10px;
+    height: 10px;
+}
+
+#wrong7 {
     display: none;
     position: absolute;
     top: 78px;
@@ -499,7 +574,26 @@ body {
     font-size: 10px;
 }
 
+#wrongtrack {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 46px;
+    color: red;
+    font-family: Arial, serif;
+    font-size: 10px;
+}
+
 #asd17 {
+    position: absolute;
+    top: 80px;
+    left: 33px;
+    color: #330033;
+    font-family: Arial, serif;
+    font-size: 14px;
+}
+
+#asd202 {
     position: absolute;
     top: 80px;
     left: 33px;
@@ -515,7 +609,23 @@ body {
     width: 305px;
 }
 
+#namesong {
+    position: absolute;
+    top: 115px;
+    left: 33px;
+    width: 305px;
+}
+
 #wrong3 {
+    display: none;
+    position: absolute;
+    top: 147px;
+    left: 34px;
+    width: 10px;
+    height: 10px;
+}
+
+#wrong8 {
     display: none;
     position: absolute;
     top: 147px;
@@ -534,6 +644,16 @@ body {
     font-size: 10px;
 }
 
+#wrongns {
+    display: none;
+    position: absolute;
+    top: 137px;
+    left: 46px;
+    color: red;
+    font-family: Arial, serif;
+    font-size: 10px;
+}
+
 #asd18 {
     position: absolute;
     top: 149px;
@@ -543,7 +663,25 @@ body {
     font-size: 14px;
 }
 
+#asd203 {
+    position: absolute;
+    top: 149px;
+    left: 33px;
+    color: #330033;
+    font-family: Arial, serif;
+    font-size: 14px;
+}
+
+
+
 #createaccountB {
+    position: absolute;
+    top: 184px;
+    left: 33px;
+    width: 305px;
+}
+
+#descpsong {
     position: absolute;
     top: 184px;
     left: 33px;
@@ -559,7 +697,26 @@ body {
     height: 10px;
 }
 
+#wrong9 {
+    display: none;
+    position: absolute;
+    top: 222px;
+    left: 34px;
+    width: 10px;
+    height: 10px;
+}
+
 #wrongb {
+    display: none;
+    position: absolute;
+    top: 212px;
+    left: 46px;
+    color: red;
+    font-family: Arial, serif;
+    font-size: 10px;
+}
+
+#wrongds {
     display: none;
     position: absolute;
     top: 212px;
@@ -710,6 +867,15 @@ body {
     border-radius: 4px;
 }
 
+#asd223 {
+    position: absolute;
+    width: 100%;
+    height: 75px;
+    background: #330033;
+    border-radius: 4px;
+}
+
+
 #asd24 {
     top: 230px;
 }
@@ -745,5 +911,12 @@ body {
     left: 842px;
     width: 48px;
     height: 17px;  
+}
+
+#f1{
+	top: 75px;
+	position: absolute;
+    width: 100%;
+    height: 100%;
 }
 

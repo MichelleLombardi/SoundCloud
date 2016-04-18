@@ -71,7 +71,11 @@ $(document).ready(function () {
     
     //click en el boton uploadyourown
     uluyo.click(function(){
-    	modal3.css({display: "block"});
+    	if(uluyo.attr('disabled','true')){
+    		modal3.css({display: "block"});
+    	}else{
+    		modal1.css({display: "block"});
+    	}
     });
 
     //click en el boton create account
@@ -154,6 +158,7 @@ $(document).ready(function () {
 	                            logoutdiv.css({"display":"inline"});
 	                            logoutdiv.text(data.nombre+" "+data.apellido);
 	                            opclo.css({"display":"block"});
+	                            uluyo.attr('disabled','true');
                             }, 5000);
                         }
                         else {
@@ -164,6 +169,7 @@ $(document).ready(function () {
                             setTimeout(function(){ 
 	                            loading.css({display: "none"});
 	                            anuncio.css({display: "block"});
+	                            uluyo.attr('disabled','false');
 	
 	                            setTimeout(function () {
 	                                anuncio.css({display: "none"});
@@ -180,6 +186,7 @@ $(document).ready(function () {
                         setTimeout(function(){ 
 	                        loading.css({display: "none"});
 	                        anuncio.css({display: "block"});
+	                        uluyo.attr('disabled','false');
 	
 	                        setTimeout(function () {
 	                            anuncio.css({display: "none"});
