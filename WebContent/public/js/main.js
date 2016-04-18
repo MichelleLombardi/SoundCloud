@@ -738,15 +738,19 @@ $(document).ready(function () {
                     localStorage.clear();
                     console.log(error);
                     console.log("Hay una sesion activa?: no");
+                    signin.css({"display":"block"});
+                    createaccount.css({"display":"block"});
                     logoutdiv.css({"display":"none"});
                     opclo.css({"display":"none"});
                 }
             },
             error: function (err) {
-            	var error = data.error;
+            	var error = err;
                 localStorage.clear();
                 console.log(error);
                 console.log("Hay una sesion activa?: no");
+                signin.css({"display":"block"});
+                createaccount.css({"display":"block"});
                 logoutdiv.css({"display":"none"});
                 opclo.css({"display":"none"});
             }
