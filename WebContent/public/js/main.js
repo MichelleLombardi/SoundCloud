@@ -102,6 +102,7 @@ $(document).ready(function () {
             wrongdsi.css({display: "none"});
             wrongds.css({display: "none"}); 
             tagsong.val(vacio);
+            tagsong.css({border: "1px solid #DBE1EB"});
             wrongdti.css({display: "none"});
             wrongt.css({display: "none"});
     		modal3.css({display: "block"});
