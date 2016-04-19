@@ -64,7 +64,9 @@ $(document).ready(function () {
     var wrongdti = $("#wrong10"); //imagen wrong uluyo tag
     var wrongt = $("#wrongt"); //parrafo de wrong uluyo tag
     var anuncio3 = $("#anuncio3");//div anuncion error uluyo
-    
+
+    var uForm = $("#uForm");//div anuncion error uluyo
+
     var perfil =$("#perfil");
     
 
@@ -867,7 +869,10 @@ $(document).ready(function () {
                         var fileExtension = music.name.substring(music.name.lastIndexOf('.') + 1);
                 
                         var form = new FormData( uForm[0]);
-                
+
+                        console.log(form);
+                        console.log(uForm);
+
                         console.log(music);
                         console.log(fileExtension);
                         

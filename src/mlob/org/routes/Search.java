@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("Search")
+@WebServlet("/search")
 public class Search extends HttpServlet {
     private PrintWriter out = null;
 
-    /*
-    // Conexion a db4free
+    /*// Conexion a db4free
     private JDBC jdbc = new JDBC(
             JDBC.JDBC_MYSQL,        // JDBC
             "db4free.org",          // Host
@@ -24,8 +23,7 @@ public class Search extends HttpServlet {
             "masterkey",            // Pass
             "soundcloudveinte",     // DataBase
             JDBC.PORT_MYSQL         // Port
-    );
-    */
+    );*/
 
     // Conexion a postgres
     private JDBC jdbc = new JDBC(
