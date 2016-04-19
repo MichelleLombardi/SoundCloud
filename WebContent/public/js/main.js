@@ -39,6 +39,8 @@ $(document).ready(function () {
     var check2 = $("#check1"); //imagen check create account password
     var anuncio2 = $("#anuncio2");//div anuncion error signin
     
+    var search = $("#inputsearch");
+    var searchButton = $("#imgsearch");
     
     var logoutdiv = $("#logoutdiv");
     var opclo = $("#opclo");
@@ -1199,5 +1201,43 @@ $(document).ready(function () {
             }
         })
     });
+    
+    // Busqueda de canciones
+    searchButton.click(function() {
+        if( search.val() != '' ) {
+            console.log("Hacemos una busqueda:");
+            $.ajax({
+                url: "./search",
+                method: "GET",
+                data: {
+                    data: search.val()
+                },
+                success: function (data) {
+                    // Borramos el localstorage
+                    if( !data.error ) {
+                        var arreglo = data.arr;
+                        var tabla = $("#tabla");
+                        for( var i = 0; i < arreglo.length; i++ ) {
+                            tabla.append(
+                                $("<tr>").append(
+                                    $("<td>").text(
+                                        arreglo[i]    
+                                    )    
+                                )    
+                            )
+                        }
+                    }
+                    else {
+                    	var error = data.error;
+                        console.log(error);
+                    }
+                },
+                error: function (err) {
+                	var error = data.error;
+                    console.log(error);
+                }
+            })
+        }
+    })
     
 });
