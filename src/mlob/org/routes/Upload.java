@@ -18,16 +18,6 @@ import java.util.Date;
 public class Upload extends HttpServlet {
     private PrintWriter out = null;
 
-    /*// Conexion a db4free
-    private JDBC jdbc = new JDBC(
-            JDBC.JDBC_MYSQL,        // JDBC
-            "db4free.org",          // Host
-            "brutal",               // User
-            "masterkey",            // Pass
-            "soundcloudveinte",     // DataBase
-            JDBC.PORT_MYSQL         // Port
-    );*/
-
     // Conexion a postgres
     private JDBC jdbc = new JDBC(
             JDBC.JDBC_POSTGRESQL,        // JDBC
@@ -38,7 +28,7 @@ public class Upload extends HttpServlet {
             JDBC.PORT_POSTGRESQL         // Port
     );
 
-    String upload = "" +
+    private String upload = "" +
             "INSERT INTO media (" +
             "   id_media, " +
             "   url_media, " +
@@ -54,7 +44,26 @@ public class Upload extends HttpServlet {
             "   ?, " +
             "   ?, " +
             "   ?, " +
+            "   ?  " +
+            ")";
+
+    private String getMediaId = "" +
+            "SELECT id_media FROM media " +
+            " WHERE " +
+            "  url_media = ? OR" +
+            "  created_at_media = ? OR" +
+            "  descripcion_media = ? OR" +
+            "  views_media = ? OR" +
+            "  name_media = ? OR" +
+            "  tags_media = ? ";
+
+    private String createUserMedia = "" +
+            "INSERT INTO user_media (" +
+            "   id_media, " +
+            "   id_app_user " +
+            ") VALUES (" +
             "   ?, " +
+            "   ? " +
             ")";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,11 +79,27 @@ public class Upload extends HttpServlet {
         System.out.println(file);
 
         String namesong = request.getParameter("namesong");
+        String descpsong = request.getParameter("descpsong");
+        String tagsong = request.getParameter("tagsong");
+
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        Timestamp timestamp = new Timestamp(now.getTime());
 
         InputStream filecontent = file.getInputStream();
         OutputStream os = null;
 
-        String dir = System.getProperty("user.dir") + "/" + user.getId() + "/" + namesong + ".mp3";
+        String url = "/" + user.getId() + "/" + namesong + ".mp3";
+
+        String dir = System.getProperty("user.dir");
+
+        File fichero = new File(System.getProperty("user.dir") + url);
+        int i = 0;
+
+        while( fichero.exists() ) {
+            url = "/" + user.getId() + "/" + namesong + i++ + ".mp3";
+            fichero = new File(System.getProperty("user.dir") + url);
+        }
 
         try {
             os = new FileOutputStream(dir);
@@ -85,13 +110,13 @@ public class Upload extends HttpServlet {
                 os.write(bytes, 0, read);
             }
 
-            json.add("url", "");
+            jdbc.execute(upload, url, timestamp, descpsong, 0, namesong, tagsong);
 
-            Calendar calendar = Calendar.getInstance();
-            Date now = calendar.getTime();
-            Timestamp timestamp = new Timestamp(now.getTime());
+            Object[][] table = jdbc.executeQuery(getMediaId, url, timestamp, descpsong, 0, namesong, tagsong);
 
-//            jdbc.executeQuery(upload, url, );
+            jdbc.execute(createUserMedia, table[1][0], user.getId());
+
+            json.add("url", url);
 
         } catch (Exception e) {
             e.printStackTrace();

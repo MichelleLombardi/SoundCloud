@@ -15,16 +15,6 @@ import java.io.PrintWriter;
 public class Search extends HttpServlet {
     private PrintWriter out = null;
 
-    /*// Conexion a db4free
-    private JDBC jdbc = new JDBC(
-            JDBC.JDBC_MYSQL,        // JDBC
-            "db4free.org",          // Host
-            "brutal",               // User
-            "masterkey",            // Pass
-            "soundcloudveinte",     // DataBase
-            JDBC.PORT_MYSQL         // Port
-    );*/
-
     // Conexion a postgres
     private JDBC jdbc = new JDBC(
             JDBC.JDBC_POSTGRESQL,        // JDBC
@@ -37,6 +27,8 @@ public class Search extends HttpServlet {
 
     String search = "" +
             "SELECT " +
+            "   app_user.id_app_user," +
+            "   media.id_media, " +
             "   name_app_user," +
             "   lastname_app_user," +
             "   name_media," +
@@ -48,14 +40,14 @@ public class Search extends HttpServlet {
             "   INNER JOIN user_media " +
             "       ON media.id_media = user_media.id_media" +
             "   INNER JOIN app_user" +
-            "       ON user_media.id_app_user = app_user.id_app_user" +
-            "   INNER JOIN comments" +
-            "       ON media.id_media = comments.id_media " +
+            "       ON user_media.id_app_user = app_user.id_app_user " +
             "WHERE " +
-            "   CONCAT(name_app_user, ' ', lastname_app_user ) = ? OR" +
-            "   name_media = ? OR" +
-            "   tags_media = ? " +
-            "ORDER BY views_media DESC";
+            "   CONCAT(name_app_user, ' ', lastname_app_user ) LIKE ? OR" +
+            "   name_media LIKE ? OR" +
+            "   tags_media LIKE ? " +
+            "ORDER BY " +
+            "   views_media DESC " +
+            "LIMIT 1";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
@@ -69,6 +61,8 @@ public class Search extends HttpServlet {
         Object[][] table = jdbc.executeQuery(search, data, data, data);
 
         json.add("arr", table);
+
+        out.print(json.toString());
 
     }
 }

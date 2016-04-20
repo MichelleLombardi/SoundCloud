@@ -65,7 +65,6 @@ public class Streaming extends HttpServlet {
 
         String range = request.getHeader("Range");
 
-
         String rangeValues = range.substring(range.indexOf("=") + 1, range.length());
         String rangeSplit [] = rangeValues.split("-");
 

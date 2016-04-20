@@ -1221,67 +1221,98 @@ $(document).ready(function () {
                     var arreglo = data.arr;
                     var tabla = $("#tbody").text("");
                     for( var i = 0; i < arreglo.length; i++ ) {
+                        var id_media = arreglo[i].id_media;
+
+                        var td = $("<td>");
+
+                        var audio = $("<audio>")
+                            .prop({
+                                "src": "streaming?song=" + id_media,
+                                "controls": "controls",
+                                "data-id": id_media
+                            })
+                            .bind('play', function () {
+                                console.log("Parece que quieres hacer un view");
+                                if( !sessionStorage[id_media] ) {
+                                    $.ajax({
+                                        "url": "./view",
+                                        "method": "POST",
+                                        "data": {
+                                            "id_media": id_media
+                                        },
+                                        success: function (data) {
+                                            if( !data.error ) {
+                                                console.log("Oh, acabas de generar un view");
+                                                sessionStorage[id_media] = true;
+                                            }
+                                            else {
+                                                var error = data.error;
+                                                console.log(error);
+                                            }
+                                        },
+                                        error: function (err) {
+                                            console.log(err);
+                                        }
+                                    });
+                                }
+                            });
+
+                        var input = $("<input>");
+
+                        var checkbox = input.clone()
+                            .prop({
+                            "type": "checkbox",
+                            "disabled": true
+                        })
+                            .bind("change", function (e) {
+
+                            console.log("Cambiamos el estado del like");
+                            // Si hay una sesion activa hacemos like o disklike
+                            if( localStorage.user ) {
+
+
+                            }
+                            else {
+                                console.log("Oh, no estas conectado, no puedes cambiar el estdo del like");
+                            }
+
+
+                        });
+
+                        // Hacemos una peticion para ver el estado del like
+                        console.log("Estamos cargando el like");
+                        // Si hay una sesion activa habilitamos el boton de like
+                        if( localStorage.user ) {
+                            $.ajax({
+                                "url": "./like",
+                                "method": "GET",
+                                "data": {
+                                    "id_media": id_media
+                                },
+                                success: function (data) {
+                                    checkbox.removeAttr('disabled');
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            })
+                        }
+                        else {
+                            console.log("Oh, lo siento, no estas conectado");
+                        }
+
                         tabla.append(
                             $("<tr>").append(
-                                $("<td>")
-                                    .text(
-                                        arreglo[i].name_app_user
-                                    ),
-                                $("<td>")
-                                    .text(
-                                        arreglo[i].lastname_app_user
-                                    ),
-                                $("<td>")
-                                    .text(
-                                        arreglo[i].name_media
-                                    ),
-                                $("<td>")
-                                    .text(
-                                        arreglo[i].tags_media
-                                    ),
-                                $("<td>")
-                                    .text(
-                                        arreglo[i].views_media
-                                    ),
-                                $("<td>")
-                                    .text(
-                                        arreglo[i].descripcion_media
-                                    ),
-                                $("<td>")
-                                    .append(
-                                        $("<audio>")
-                                            .attr({
-                                                "src": "streaming?song=" + arreglo[i].id_media,
-                                                "controls": "controls",
-                                                "data-id": arreglo[i].id_media
-                                            }).bind('play', function () {
-                                                var id_media = this.getAttribute("data-id");
-                                                console.log("Parece que quieres hacer un view");
-                                                if( !sessionStorage[id_media] ) {
-                                                    $.ajax({
-                                                        "url": "./view",
-                                                        "data": {
-                                                            "id_media": id_media
-                                                        },
-                                                        success: function (data) {
-                                                            if( !data.error ) {
-                                                                console.log("Oh, acabas de generar un view");
-                                                                sessionStorage[id_media] = true;
-                                                            }
-                                                            else {
-                                                                var error = data.error;
-                                                                console.log(error);
-                                                            }
-                                                        },
-                                                        error: function (err) {
-                                                            console.log(err);
-                                                        }
-                                                    });
-                                                }
-                                            })
-                                    )
+                                td.clone().text(arreglo[i].name_app_user + " " + arreglo[i].lastname_app_user),
+                                td.clone().text(arreglo[i].name_media),
+                                td.clone().text(arreglo[i].tags_media),
+                                td.clone().text(arreglo[i].views_media),
+                                td.clone().text(arreglo[i].descripcion_media),
+                                td.clone().append(audio),
+                                td.clone().append(checkbox)
                             )
-                        )
+                        );
+
                     }
                 }
                 else {
