@@ -1209,40 +1209,90 @@ $(document).ready(function () {
     
     // Busqueda de canciones
     searchButton.click(function() {
-        if( search.val() != '' ) {
-            console.log("Hacemos una busqueda:");
-            $.ajax({
-                url: "./search",
-                method: "GET",
-                data: {
-                    data: search.val()
-                },
-                success: function (data) {
-                    // Borramos el localstorage
-                    if( !data.error ) {
-                        var arreglo = data.arr;
-                        var tabla = $("#tabla");
-                        for( var i = 0; i < arreglo.length; i++ ) {
-                            tabla.append(
-                                $("<tr>").append(
-                                    $("<td>").text(
-                                        arreglo[i]    
-                                    )    
-                                )    
+        console.log("Hacemos una busqueda:");
+        $.ajax({
+            url: "./search",
+            method: "GET",
+            data: {
+                data: search.val()
+            },
+            success: function (data) {
+                if( !data.error ) {
+                    var arreglo = data.arr;
+                    var tabla = $("#tbody").text("");
+                    for( var i = 0; i < arreglo.length; i++ ) {
+                        tabla.append(
+                            $("<tr>").append(
+                                $("<td>")
+                                    .text(
+                                        arreglo[i].name_app_user
+                                    ),
+                                $("<td>")
+                                    .text(
+                                        arreglo[i].lastname_app_user
+                                    ),
+                                $("<td>")
+                                    .text(
+                                        arreglo[i].name_media
+                                    ),
+                                $("<td>")
+                                    .text(
+                                        arreglo[i].tags_media
+                                    ),
+                                $("<td>")
+                                    .text(
+                                        arreglo[i].views_media
+                                    ),
+                                $("<td>")
+                                    .text(
+                                        arreglo[i].descripcion_media
+                                    ),
+                                $("<td>")
+                                    .append(
+                                        $("<audio>")
+                                            .attr({
+                                                "src": "streaming?song=" + arreglo[i].id_media,
+                                                "controls": "controls",
+                                                "data-id": arreglo[i].id_media
+                                            }).bind('play', function () {
+                                                var id_media = this.getAttribute("data-id");
+                                                console.log("Parece que quieres hacer un view");
+                                                if( !sessionStorage[id_media] ) {
+                                                    $.ajax({
+                                                        "url": "./view",
+                                                        "data": {
+                                                            "id_media": id_media
+                                                        },
+                                                        success: function (data) {
+                                                            if( !data.error ) {
+                                                                console.log("Oh, acabas de generar un view");
+                                                                sessionStorage[id_media] = true;
+                                                            }
+                                                            else {
+                                                                var error = data.error;
+                                                                console.log(error);
+                                                            }
+                                                        },
+                                                        error: function (err) {
+                                                            console.log(err);
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                    )
                             )
-                        }
+                        )
                     }
-                    else {
-                    	var error = data.error;
-                        console.log(error);
-                    }
-                },
-                error: function (err) {
-                	var error = data.error;
+                }
+                else {
+                    var error = data.error;
                     console.log(error);
                 }
-            })
-        }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
     })
     
 });

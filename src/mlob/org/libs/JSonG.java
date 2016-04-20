@@ -1,12 +1,12 @@
 package mlob.org.libs;
 
-import java.util.Arrays;
+import java.sql.Timestamp;
 
 public class JSonG {
     private String body = "";
 
     public JSonG add( Object name, Object value ) {
-        if( value instanceof String )
+        if( value instanceof String || value instanceof Timestamp)
             value = "\"" + value +"\"";
         else if( value instanceof JSonG )
             value = ((JSonG) value).toString();
@@ -49,8 +49,6 @@ public class JSonG {
         int numRows = table.length;
         int numCols = table[0].length;
         Object[] labels = table[0];
-
-        System.out.println(Arrays.toString(labels));
 
         if( this.body.equals("") )
             this.body += "\"" + name + "\":[";

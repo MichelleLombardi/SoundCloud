@@ -19,18 +19,6 @@ import java.sql.Date;
 public class Signup extends HttpServlet {
     private PrintWriter out = null;
     
-   /*
-    // Conexion a db4free
-    private JDBC jdbc = new JDBC(
-            JDBC.JDBC_MYSQL,        // JDBC
-            "db4free.org",          // Host
-            "brutal",               // User
-            "masterkey",            // Pass
-            "soundcloudveinte",     // DataBase
-            JDBC.PORT_MYSQL         // Port
-    );
-    */
-    
     // Conexion a postgres
     private JDBC jdbc = new JDBC(
             JDBC.JDBC_POSTGRESQL,        // JDBC
