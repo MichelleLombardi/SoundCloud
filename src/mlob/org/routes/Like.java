@@ -41,7 +41,10 @@ public class Like extends HttpServlet {
 
     private String toogleLike = "" +
             "UPDATE likes SET " +
-            "   likes_likes = ?";
+            "   likes_likes = ? " +
+            "WHERE " +
+            "   id_app_user = ? AND" +
+            "   id_media = ?";
 
     private String getLike = "" +
             "SELECT likes_likes " +
@@ -54,10 +57,10 @@ public class Like extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
         response.setHeader("Content-Type", "application/json");
-        JSonG json = new JSonG();
 
-        String id_media = request.getParameter("id_media");
-        String like = request.getParameter("like");
+        JSonG json = new JSonG();
+        int id_media = Integer.parseInt(request.getParameter("id_media"));
+        Boolean like = Boolean.valueOf(request.getParameter("like"));
 
         HttpSession session = request.getSession();
         SessionUser user = (SessionUser) session.getAttribute("user");
@@ -68,7 +71,7 @@ public class Like extends HttpServlet {
 
         // Si hay un dato para hacer like verificamos el estado
         if( (table.length - 1) == 1 ) {
-            jdbc.execute(toogleLike, user.getId(), id_media);
+            jdbc.execute(toogleLike, like, user.getId(), id_media);
             json.add("like", like);
         }
         else {
@@ -92,9 +95,9 @@ public class Like extends HttpServlet {
         System.out.println(user.getId());
         System.out.println(id_media);
 
-        Object[][] table = jdbc.executeQuery(getLike, user.getId(), 1);
+        Object[][] table = jdbc.executeQuery(getLike, user.getId(), id_media);
 
-        /*// Si hay un dato para hacer like verificamos el estado
+        // Si hay un dato para hacer like verificamos el estado
         if( (table.length - 1) == 1 ) {
             Boolean like = (Boolean) table[1][0];
 
@@ -102,7 +105,7 @@ public class Like extends HttpServlet {
         }
         else {
             json.add("like", false);
-        }*/
+        }
 
         out.print(json);
 

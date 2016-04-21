@@ -1269,11 +1269,25 @@ $(document).ready(function () {
                             console.log("Cambiamos el estado del like");
                             // Si hay una sesion activa hacemos like o disklike
                             if( localStorage.user ) {
-
-
+                                $.ajax({
+                                    "url": "./like",
+                                    "method": "POST",
+                                    "data": {
+                                        "id_media": id_media,
+                                        "like": checkbox.prop("checked")
+                                    },
+                                    success: function (data) {
+                                        console.log("Like cargado");
+                                        checkbox.removeAttr('disabled');
+                                        $("input:checkbox").prop("checked", data.like);
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                    }
+                                })
                             }
                             else {
-                                console.log("Oh, no estas conectado, no puedes cambiar el estdo del like");
+                                console.log("Oh, no estas conectado, no puedes cambiar el estado del like");
                             }
 
 
@@ -1290,7 +1304,10 @@ $(document).ready(function () {
                                     "id_media": id_media
                                 },
                                 success: function (data) {
+                                    console.log("Like cargado");
                                     checkbox.removeAttr('disabled');
+                                    $("input:checkbox").prop("checked", data.like);
+
                                 },
                                 error: function (err) {
                                     console.log(err);
