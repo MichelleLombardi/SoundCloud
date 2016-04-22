@@ -1234,19 +1234,22 @@ $(document).ready(function () {
                                 "controls": "controls",
                                 "data-id": id_media
                             })
+                            .addClass("song"+id_media)
                             .bind('play', function () {
                                 console.log("Parece que quieres hacer un view");
-                                if( !sessionStorage[id_media] ) {
+                                var songTag = this;
+                                var id = songTag.className.replace("song", "");
+                                if( !sessionStorage[id] ) {
                                     $.ajax({
                                         "url": "./view",
                                         "method": "POST",
                                         "data": {
-                                            "id_media": id_media
+                                            "id_media": id
                                         },
                                         success: function (data) {
                                             if( !data.error ) {
                                                 console.log("Oh, acabas de generar un view");
-                                                sessionStorage[id_media] = true;
+                                                sessionStorage[id] = true;
                                             }
                                             else {
                                                 var error = data.error;
@@ -1342,7 +1345,7 @@ $(document).ready(function () {
                             )
                         );
 
-                    }
+                    }//fin de for
                 }
                 else {
                     var error = data.error;
