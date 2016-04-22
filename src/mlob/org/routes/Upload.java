@@ -50,11 +50,11 @@ public class Upload extends HttpServlet {
     private String getMediaId = "" +
             "SELECT id_media FROM media " +
             " WHERE " +
-            "  url_media = ? OR" +
-            "  created_at_media = ? OR" +
-            "  descripcion_media = ? OR" +
-            "  views_media = ? OR" +
-            "  name_media = ? OR" +
+            "  url_media = ? AND" +
+            "  created_at_media = ? AND" +
+            "  descripcion_media = ? AND" +
+            "  views_media = ? AND" +
+            "  name_media = ? AND" +
             "  tags_media = ? ";
 
     private String createUserMedia = "" +
@@ -111,11 +111,15 @@ public class Upload extends HttpServlet {
             }
 
             jdbc.execute(upload, url, timestamp, descpsong, 0, namesong, tagsong);
-
+            
             Object[][] table = jdbc.executeQuery(getMediaId, url, timestamp, descpsong, 0, namesong, tagsong);
 
+            
+            
             jdbc.execute(createUserMedia, table[1][0], user.getId());
 
+            System.out.println(table[1][0]);
+            
             json.add("url", url);
 
         } catch (Exception e) {

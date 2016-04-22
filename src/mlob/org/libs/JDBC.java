@@ -74,6 +74,7 @@ public class JDBC {
         ResultSet rs = null;
         try {
             PreparedStatement pstmt = this.setValues(query, values);
+            System.out.println(pstmt);
             rs = pstmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

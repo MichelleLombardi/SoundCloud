@@ -42,12 +42,12 @@ public class Search extends HttpServlet {
             "   INNER JOIN app_user" +
             "       ON user_media.id_app_user = app_user.id_app_user " +
             "WHERE " +
-            "   CONCAT(name_app_user, ' ', lastname_app_user ) LIKE ? OR" +
-            "   name_media LIKE ? OR" +
-            "   tags_media LIKE ? " +
+            "   UPPER(CONCAT(name_app_user, ' ', lastname_app_user )) LIKE UPPER(?) OR" +
+            "   UPPER(name_media) LIKE UPPER(?) OR" +
+            "   UPPER(tags_media) LIKE UPPER(?) " +
             "ORDER BY " +
             "   views_media DESC " +
-            "LIMIT 20";
+            "";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
@@ -56,6 +56,8 @@ public class Search extends HttpServlet {
 
         String data = "%" + request.getParameter("data").trim() + "%";
 
+        System.out.println(data);
+        
         // Buscar canciones por nombre, apellido del usuario,
         // o por nombre o genero de la cancion
         Object[][] table = jdbc.executeQuery(search, data, data, data);

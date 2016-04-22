@@ -38,9 +38,12 @@ public class View extends HttpServlet {
 
         String id_media = request.getParameter("id_media");
 
+        System.out.println(id_media);
+        
         jdbc.execute(incrementView);
 
-        json.add("status", "OK");
+        json.add("status", "OK")
+        	.add("id_media", id_media);
 
         out.println(json.toString());
 
