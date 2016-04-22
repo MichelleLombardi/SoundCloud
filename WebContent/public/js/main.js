@@ -1212,6 +1212,7 @@ $(document).ready(function () {
     
     // Busqueda de canciones
     searchButton.click(function() {
+        search.val("");
         console.log("Hacemos una busqueda:");
         $.ajax({
             url: "./search",
