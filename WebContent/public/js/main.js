@@ -69,6 +69,9 @@ $(document).ready(function () {
 
     var perfil =$("#perfil");
     
+    var modal4 = $("#myModal4"); // modal comments
+    var x3 = $("#x3");// button x que cierra modal4
+    
 
     //click en el boton signin
     signin.click(function () {
@@ -1217,6 +1220,7 @@ $(document).ready(function () {
                 data: search.val()
             },
             success: function (data) {
+                console.log(data);
                 if( !data.error ) {
                     var arreglo = data.arr;
                     var tabla = $("#tbody").text("");

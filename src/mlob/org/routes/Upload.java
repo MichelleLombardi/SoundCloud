@@ -102,7 +102,7 @@ public class Upload extends HttpServlet {
         }
 
         try {
-            os = new FileOutputStream(dir);
+            os = new FileOutputStream(dir + url);
             int read = 0;
             byte[] bytes = new byte[1024];
 

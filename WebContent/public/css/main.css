@@ -167,6 +167,44 @@ body {
     overflow-y: auto;
 }
 
+#cDiv::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    background-color: #F5F5F5;
+}
+
+#cDiv::-webkit-scrollbar{
+    width: 9px;
+    background-color: #F5F5F5;
+}
+
+#cDiv::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #C8C8C8;
+}
+
+#cDiv{
+    position: absolute;
+    width: 100%;
+    height: 160px;
+    border-radius: 4px;
+    top: 75px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#cmDiv{
+    position: absolute;
+    width: 100%;
+    height: 145px;
+    border-radius: 4px;
+    top: 237px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
 
 #asd {
     position: absolute;
@@ -317,10 +355,30 @@ body {
     letter-spacing: 2px;
 }
 
+#titcom3 {
+    position: absolute;
+    top: 13px;
+    left: 61px;
+    color: white;
+    font-family: Arial, serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
 #asd9 {
     position: absolute;
     top: 30px;
     left: 280px;
+    color: white;
+    font-family: Arial, serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#titcom2 {
+    position: absolute;
+    top: 30px;
+    left: 250px;
     color: white;
     font-family: Arial, serif;
     font-size: 16px;
@@ -346,6 +404,7 @@ body {
     font-size: 16px;
     letter-spacing: 1px;
 }
+
 
 #asd10 {
     position: absolute;
@@ -496,6 +555,19 @@ body {
     font-weight: bold;
 }
 
+#x3 {
+    position: absolute;
+    top:4px; 
+    left:367px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    -webkit-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 0 12px 1px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+}
+
+
+
 #asd13 {
     width: 400px;
     height: 380px;
@@ -503,6 +575,11 @@ body {
 
 
 #asd113 {
+    width: 400px;
+    height: 380px;
+}
+
+#divcom3 {
     width: 400px;
     height: 380px;
 }
@@ -516,6 +593,14 @@ body {
 }
 
 #asd114 {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 38px;
+    height: 38px;
+}
+
+#iccom3 {
     position: absolute;
     top: 15px;
     left: 15px;
@@ -947,6 +1032,21 @@ body {
     font-size: 18px;
 }
 
+#asd25 {
+    position: absolute;
+    left: 12px;
+    font-family: Arial;
+    color: white;
+    font-size: 18px;
+}
+#asd26 {
+    position: absolute;
+    left: 12px;
+    font-family: Arial;
+    color: white;
+    font-size: 18px;
+}
+
 #x1 {
     position: absolute;
     top:4px; 
@@ -967,6 +1067,14 @@ body {
 }
 
 #asd223 {
+    position: absolute;
+    width: 100%;
+    height: 75px;
+    background: #330033;
+    border-radius: 4px;
+}
+
+#divcom3arr {
     position: absolute;
     width: 100%;
     height: 75px;
