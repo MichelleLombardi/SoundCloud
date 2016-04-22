@@ -197,7 +197,7 @@ body {
 #cmDiv{
     position: absolute;
     width: 100%;
-    height: 145px;
+    height: 160px;
     border-radius: 4px;
     top: 237px;
     overflow-x: hidden;
@@ -422,6 +422,13 @@ body {
     width: 305px;
 }
 
+#fromname {
+    position: absolute;
+    top: 20px;
+    left: 78px;
+    width: 230px;
+}
+
 #wrong {
     display: none;
     position: absolute;
@@ -440,6 +447,7 @@ body {
     font-family: Arial, serif;
     font-size: 10px;
 }
+
 
 #asd11 {
     position: absolute;
@@ -475,6 +483,24 @@ body {
     height: 10px;
 }
 
+#wrong13 {
+    display: block;
+    position: absolute;
+    top: 28px;
+    left: 345px;
+    width: 10px;
+    height: 10px;
+}
+
+#wrong14 {
+    display: block;
+    position: absolute;
+    top: 113px;
+    left: 34px;
+    width: 10px;
+    height: 10px;
+}
+
 #wrongpass {
     display: none;
     position: absolute;
@@ -503,6 +529,17 @@ body {
 }
 
 #anuncio {
+    display: none;
+    position: absolute;
+    top: 130px;
+    left: 25px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    width: 345px;
+}
+
+#anuncio4 {
     display: none;
     position: absolute;
     top: 130px;
@@ -581,7 +618,7 @@ body {
 
 #divcom3 {
     width: 400px;
-    height: 380px;
+    height: 400px;
 }
 
 #asd14 {
@@ -656,6 +693,15 @@ body {
     font-size: 14px;
 }
 
+#from {
+    position: absolute;
+    top: 10px;
+    left: 33px;
+    color: #330033;
+    font-family: Arial, serif;
+    font-size: 14px;
+}
+
 #createaccountFN {
     position: absolute;
     top: 43px;
@@ -697,11 +743,38 @@ body {
     font-family: Arial, serif;
     font-size: 10px;
 }
+#textcom{
+    position: absolute;
+    top: 52px;
+    left: 33px;
+    color: black;
+    font-family: Arial;
+    font-size: 14px; 
+    border-radius: 4px;
+    border: 1px solid #DBE1EB;
+    padding: 5px 10px 5px 12px;
+    background-color: #E0E0E0;
+}
+
+#bio:focus{
+    background-color: white;
+    color: #484848;
+}
 
 #wrongtrack {
     display: none;
     position: absolute;
     top: 68px;
+    left: 46px;
+    color: red;
+    font-family: Arial, serif;
+    font-size: 10px;
+}
+
+#wrongtextcom {
+    display: block;
+    position: absolute;
+    top: 103px;
     left: 46px;
     color: red;
     font-family: Arial, serif;
@@ -980,6 +1053,14 @@ body {
     left: 283px;
 }
 
+#cBotton {
+    position: absolute;
+    width: 50px;
+    height: 15px;
+    top: 130px;
+    left: 283px;
+}
+
 #cancel1 {
     position: absolute;
     width: 46px;
@@ -994,6 +1075,16 @@ body {
     width: 46px;
     height: 16px;
     top: 318px;
+    left: 197px;
+    color: #330033;
+    width: 50px;
+}
+
+#cancel4 {
+    position: absolute;
+    width: 46px;
+    height: 16px;
+    top: 130px;
     left: 197px;
     color: #330033;
     width: 50px;

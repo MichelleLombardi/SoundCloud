@@ -47,7 +47,7 @@ public class Search extends HttpServlet {
             "   tags_media LIKE ? " +
             "ORDER BY " +
             "   views_media DESC " +
-            "LIMIT 1";
+            "LIMIT 20";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
