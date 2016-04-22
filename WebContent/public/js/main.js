@@ -85,7 +85,7 @@ $(document).ready(function () {
         var vacio = "";
         signinEmail.val(vacio);
         signinPass.val(vacio);
-        modal4.css({display: "block"});//1
+        modal1.css({display: "block"});//1
         setInterval(function () {
             if (signinPass.val().length == 20) {
                 check.css({display: "block"});
