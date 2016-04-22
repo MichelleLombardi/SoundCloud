@@ -1212,7 +1212,6 @@ $(document).ready(function () {
     
     // Busqueda de canciones
     searchButton.click(function() {
-        search.val("");
         console.log("Hacemos una busqueda:");
         $.ajax({
             url: "./search",
@@ -1221,7 +1220,6 @@ $(document).ready(function () {
                 data: search.val()
             },
             success: function (data) {
-                console.log(data);
                 if( !data.error ) {
                     var arreglo = data.arr;
                     var tabla = $("#tbody").text("");
@@ -1270,8 +1268,9 @@ $(document).ready(function () {
                             "disabled": true
                         })
                             .bind("change", function (e) {
-
                             console.log("Cambiamos el estado del like");
+
+                            $(this).prop({"disabled": true});
                             // Si hay una sesion activa hacemos like o disklike
                             if( localStorage.user ) {
                                 $.ajax({
@@ -1284,7 +1283,7 @@ $(document).ready(function () {
                                     success: function (data) {
                                         console.log("Like cargado");
                                         checkbox.removeAttr('disabled');
-                                        $("input:checkbox").prop("checked", data.like);
+                                        checkbox.prop("checked", data.like);
                                     },
                                     error: function (err) {
                                         console.log(err);
@@ -1297,6 +1296,13 @@ $(document).ready(function () {
 
 
                         });
+
+                        var comentarios = input.clone()
+                            .prop({
+                                "type": "button",
+                                "disabled": true,
+                                "value": "Comentarios"
+                            });
 
                         // Hacemos una peticion para ver el estado del like
                         console.log("Estamos cargando el like");
@@ -1311,7 +1317,7 @@ $(document).ready(function () {
                                 success: function (data) {
                                     console.log("Like cargado");
                                     checkbox.removeAttr('disabled');
-                                    $("input:checkbox").prop("checked", data.like);
+                                    checkbox.prop("checked", data.like);
 
                                 },
                                 error: function (err) {
@@ -1327,11 +1333,12 @@ $(document).ready(function () {
                             $("<tr>").append(
                                 td.clone().text(arreglo[i].name_app_user + " " + arreglo[i].lastname_app_user),
                                 td.clone().text(arreglo[i].name_media),
-                                td.clone().text(arreglo[i].tags_media),
-                                td.clone().text(arreglo[i].views_media),
                                 td.clone().text(arreglo[i].descripcion_media),
+                                td.clone().text(arreglo[i].views_media),
+                                td.clone().text(arreglo[i].tags_media),
                                 td.clone().append(audio),
-                                td.clone().append(checkbox)
+                                td.clone().append(checkbox),
+                                td.clone().append(comentarios)
                             )
                         );
 
@@ -1344,6 +1351,9 @@ $(document).ready(function () {
             },
             error: function (err) {
                 console.log(err);
+            },
+            done: function () {
+                search.val("");
             }
         })
     })
