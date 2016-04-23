@@ -1209,9 +1209,9 @@ $(document).ready(function () {
             }
         })
     });
-    
+
     // Busqueda de canciones
-    searchButton.click(function() {
+    var searchFunc = function() {
         console.log("Hacemos una busqueda:");
         $.ajax({
             url: "./search",
@@ -1234,11 +1234,12 @@ $(document).ready(function () {
                                 "controls": "controls",
                                 "data-id": id_media
                             })
-                            .addClass("song"+id_media)
+                            .data("id", id_media)
                             .bind('play', function () {
                                 console.log("Parece que quieres hacer un view");
                                 var songTag = this;
-                                var id = songTag.className.replace("song", "");
+                                var id = songTag.data("id");
+                                console.log(id);
                                 if( !sessionStorage[id] ) {
                                     $.ajax({
                                         "url": "./view",
@@ -1263,48 +1264,42 @@ $(document).ready(function () {
                                 }
                             });
 
-                        var input = $("<input>");
-
-                        var checkbox = input.clone()
+                        var checkbox = $("<input>")
                             .prop({
-                            "type": "checkbox",
-                            "disabled": true
-                        })
+                                "type": "checkbox",
+                                "disabled": true
+                            })
+                            .data("id", id_media)
                             .bind("change", function (e) {
-                            console.log("Cambiamos el estado del like");
+                                console.log("Cambiamos el estado del like");
 
-                            $(this).prop({"disabled": true});
-                            // Si hay una sesion activa hacemos like o disklike
-                            if( localStorage.user ) {
-                                $.ajax({
-                                    "url": "./like",
-                                    "method": "POST",
-                                    "data": {
-                                        "id_media": id_media,
-                                        "like": checkbox.prop("checked")
-                                    },
-                                    success: function (data) {
-                                        console.log("Like cargado");
-                                        checkbox.removeAttr('disabled');
-                                        checkbox.prop("checked", data.like);
-                                    },
-                                    error: function (err) {
-                                        console.log(err);
-                                    }
-                                })
-                            }
-                            else {
-                                console.log("Oh, no estas conectado, no puedes cambiar el estado del like");
-                            }
+                                var checkTag = $(this);
+                                
+                                checkTag.prop({"disabled": true});
+                                // Si hay una sesion activa hacemos like o disklike
+                                if( localStorage.user ) {
+                                    $.ajax({
+                                        "url": "./like",
+                                        "method": "POST",
+                                        "data": {
+                                            "id_media": checkTag.data("id"),
+                                            "like": checkTag.prop("checked")
+                                        },
+                                        success: function (data) {
+                                            console.log("Like cargado");
+                                            checkTag.removeAttr('disabled');
+                                            checkTag.prop("checked", data.like);
+                                        },
+                                        error: function (err) {
+                                            console.log(err);
+                                        }
+                                    })
+                                }
+                                else {
+                                    console.log("Oh, no estas conectado, no puedes cambiar el estado del like");
+                                }
 
 
-                        });
-
-                        var comentarios = input.clone()
-                            .prop({
-                                "type": "button",
-                                "disabled": true,
-                                "value": "Comentarios"
                             });
 
                         // Hacemos una peticion para ver el estado del like
@@ -1314,11 +1309,13 @@ $(document).ready(function () {
                             $.ajax({
                                 "url": "./like",
                                 "method": "GET",
+                                "async": false,
                                 "data": {
                                     "id_media": id_media
                                 },
                                 success: function (data) {
                                     console.log("Like cargado");
+                                    console.log(checkbox);
                                     checkbox.removeAttr('disabled');
                                     checkbox.prop("checked", data.like);
 
@@ -1331,6 +1328,13 @@ $(document).ready(function () {
                         else {
                             console.log("Oh, lo siento, no estas conectado");
                         }
+
+                        var comentarios = $("<input>")
+                            .prop({
+                                "type": "button",
+                                "disabled": true,
+                                "value": "Comentarios"
+                            });
 
                         tabla.append(
                             $("<tr>").append(
@@ -1359,6 +1363,10 @@ $(document).ready(function () {
                 search.val("");
             }
         })
-    })
-    
+    };
+
+    searchFunc();
+
+    searchButton.click(searchFunc);
+
 });

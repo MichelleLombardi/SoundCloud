@@ -51,7 +51,7 @@ public class Like extends HttpServlet {
             "FROM likes " +
             "WHERE " +
             "   id_app_user = ? AND " +
-            "   id_media = ?" +
+            "   id_media = ? " +
             "LIMIT 1";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

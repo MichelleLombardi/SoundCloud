@@ -61,7 +61,7 @@ public class Comment extends HttpServlet {
         Date now = calendar.getTime();
         Timestamp created_at_comments = new Timestamp(now.getTime());
 
-        jdbc.excute(postComment, user.getName(), text_comments, created_at_comments, id_media);
+        jdbc.execute(postComment, user.getName(), text_comments, created_at_comments, id_media);
 
     }
 
