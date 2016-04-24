@@ -45,7 +45,7 @@ $(document).ready(function () {
     var logoutdiv = $("#logoutdiv");
     var opclo = $("#opclo");
     var logout = $("#logout");//boton para cerrar la sesion
-    
+
     var uluyo =$("#uploadyourown"); // abre el modal3
     var modal3 = $("#myModal3"); // modal upload 
     var x2 = $("#x2");// button x que cierra modal3
@@ -71,6 +71,8 @@ $(document).ready(function () {
     
     var modal4 = $("#myModal4"); // modal comments
     var x3 = $("#x3");// button x que cierra modal4
+
+    var cBotton = $("#cBotton");
     
 
     //click en el boton signin
@@ -1120,6 +1122,9 @@ $(document).ready(function () {
         if (event.target == modal3[0]) {
             modal3.css({display: "none"});
         }
+        if (event.target == modal4[0]) {
+            modal4.css({display: "none"});
+        }
     });
     
     // Esto verifica si hay una sesion guardada
@@ -1237,9 +1242,8 @@ $(document).ready(function () {
                             .data("id", id_media)
                             .bind('play', function () {
                                 console.log("Parece que quieres hacer un view");
-                                var songTag = this;
+                                var songTag = $(this);
                                 var id = songTag.data("id");
-                                console.log(id);
                                 if( !sessionStorage[id] ) {
                                     $.ajax({
                                         "url": "./view",
@@ -1250,6 +1254,8 @@ $(document).ready(function () {
                                         success: function (data) {
                                             if( !data.error ) {
                                                 console.log("Oh, acabas de generar un view");
+                                                var views = $(songTag.parent().siblings()[3]);
+                                                views.text( parseInt(views.text()) + 1 );
                                                 sessionStorage[id] = true;
                                             }
                                             else {
@@ -1305,7 +1311,54 @@ $(document).ready(function () {
                         // Hacemos una peticion para ver el estado del like
                         console.log("Estamos cargando el like");
                         // Si hay una sesion activa habilitamos el boton de like
+
+                        var comentarios = $("<input>")
+                            .prop({
+                                "type": "button",
+                                "disabled": true,
+                                "value": "Comentarios"
+                            })
+                            .data("id", id_media)
+                            .click(function(){
+
+                                var commentTag = $(this);
+
+                                modal4.css({"display":"block"});
+                                $.ajax({
+                                    "url": "./comment",
+                                    "method": "GET",
+                                    "data": {
+                                        "id_media": commentTag.data("id")
+                                    },
+                                    success: function (data) {
+                                        if( !data.error ) {
+                                            var arreglo = data.arr;
+                                            var comments = $("#comments").text("");
+                                            comments.data("id", commentTag.data("id"));
+                                            for (var i = 0; i < arreglo.length; i++) {
+                                                comments.append(
+                                                    $("<li>")
+                                                        .append(
+                                                            $("<h2>").text(arreglo[i].username_comments),
+                                                            $("<p>").text(arreglo[i].text_comments),
+                                                            $("<small>").text(arreglo[i].created_at_comments)
+                                                        )
+                                                )
+                                            }
+                                        }
+                                        else {
+                                            var error = data.error;
+                                            console.log(error);
+                                        }
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                    }
+                                });
+                            });
+
                         if( localStorage.user ) {
+                            comentarios.removeAttr("disabled");
                             $.ajax({
                                 "url": "./like",
                                 "method": "GET",
@@ -1328,13 +1381,6 @@ $(document).ready(function () {
                         else {
                             console.log("Oh, lo siento, no estas conectado");
                         }
-
-                        var comentarios = $("<input>")
-                            .prop({
-                                "type": "button",
-                                "disabled": true,
-                                "value": "Comentarios"
-                            });
 
                         tabla.append(
                             $("<tr>").append(
@@ -1368,5 +1414,48 @@ $(document).ready(function () {
     searchFunc();
 
     searchButton.click(searchFunc);
+
+    x3.click(function() {
+        modal4.css({"display":"none"});
+    });
+
+    cBotton.click(function() {
+        var id = $("#comments").data("id");
+        var fromname = $("#fromname");
+        var textcom = $("#textcom");
+        $.ajax({
+            "url": "./comment",
+            "method": "POST",
+            "data": {
+                "id_media": id,
+                "username_comments": fromname.val(),
+                "text_comments": textcom.val()
+            },
+            success: function (data) {
+                console.log("Peticion hecha");
+                if( !data.error ) {
+                    var arreglo = data.arr;
+                    var comments = $("#comments");
+                    comments.append(
+                        $("<li>")
+                            .append(
+                                $("<h2>").text(fromname.val()),
+                                $("<p>").text(textcom.val()),
+                                $("<small>").text(data.created_at_comments)
+                            )
+                    );
+                    fromname.val("");
+                    textcom.val("");
+                }
+                else {
+                    var error = data.error;
+                    console.log(error);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
 
 });

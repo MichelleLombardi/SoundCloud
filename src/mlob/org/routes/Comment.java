@@ -2,14 +2,12 @@ package mlob.org.routes;
 
 import mlob.org.libs.JDBC;
 import mlob.org.libs.JSonG;
-import mlob.org.objs.SessionUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -46,14 +44,24 @@ public class Comment extends HttpServlet {
             "   ?" +
             ")";
 
+    private String getComment = "" +
+            "SELECT " +
+            "   username_comments," +
+            "   text_comments," +
+            "   created_at_comments " +
+            "FROM " +
+            "   comments " +
+            "WHERE " +
+            "   id_media = ? " +
+            "ORDER BY" +
+            "   created_at_comments";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         out = response.getWriter();
         response.setHeader("Content-Type", "application/json");
         JSonG json = new JSonG();
 
-        HttpSession session = request.getSession();
-        SessionUser user = (SessionUser) session.getAttribute("user");
-
+        String username_comments = request.getParameter("username_comments");
         String text_comments = request.getParameter("text_comments");
         String id_media = request.getParameter("id_media");
 
@@ -61,11 +69,25 @@ public class Comment extends HttpServlet {
         Date now = calendar.getTime();
         Timestamp created_at_comments = new Timestamp(now.getTime());
 
-        jdbc.execute(postComment, user.getName(), text_comments, created_at_comments, id_media);
+        jdbc.execute(postComment, username_comments, text_comments, created_at_comments, Integer.parseInt(id_media));
+
+        json.add("created_at_comments", created_at_comments);
+
+        out.print(json.toString());
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        out = response.getWriter();
+        response.setHeader("Content-Type", "application/json");
+        JSonG json = new JSonG();
 
+        String id_media = request.getParameter("id_media");
+
+        Object[][] table = jdbc.executeQuery(getComment, Integer.parseInt(id_media));
+
+        json.add("arr", table);
+
+        out.print(json.toString());
     }
 }
