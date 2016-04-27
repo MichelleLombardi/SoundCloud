@@ -1217,6 +1217,7 @@ $(document).ready(function () {
 
     // Busqueda de canciones
     var searchFunc = function() {
+    	
         console.log("Hacemos una busqueda:");
         $.ajax({
             url: "./search",
@@ -1225,6 +1226,7 @@ $(document).ready(function () {
                 data: search.val()
             },
             success: function (data) {
+            	search.val("");
                 if( !data.error ) {
                     var arreglo = data.arr;
                     var tabla = $("#tbody").text("");
